@@ -85,5 +85,11 @@ export const errorMessagesConfig: { [messageCode: string]: IErrorMessages } = {
         httpStatus: HttpStatus.BAD_REQUEST,
         errorMessage: 'Unable to connect the user without password.',
         userMessage: 'Veuillez indiquer votre mot de passe.'
+    },
+    'genric:notFound': {
+        type: 'notFound',
+        httpStatus: HttpStatus.NOT_FOUND,
+        errorMessage: 'Objeto não encontrado',
+        userMessage: 'Aucun utilisateur trouvé avec les informations fourni.'
     }
 };

@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
+import { HttpStrategy } from './http.strategy';
+import { PassportModule } from '@nestjs/passport';
+//import { UserModule } from '../users/user.module';
 
 @Module({
-    controllers: [AuthController],
-    providers: [AuthService],
-    imports: [],
-    exports: []
+  //imports: [UserModule],
+  imports: [
+    PassportModule.register({ defaultStrategy: 'bearer' }),
+  ],
+  providers: [AuthService, HttpStrategy]
 })
 export class AuthModule {}

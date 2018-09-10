@@ -7,10 +7,10 @@ export const databaseConfig: IDatabaseConfig = {
         database: process.env.DB_NAME || '',
         host: process.env.DB_HOST || '127.0.0.1',
         port: Number(process.env.DB_PORT) || 5432,
-        dialect: 'postgres',
+        dialect: 'mssql',
         logging: false,
         force: true,
-        timezone: '+02:00'
+        timezone: '-02:00'
     },
     production: {
         username: process.env.DB_USER || '',
@@ -18,10 +18,10 @@ export const databaseConfig: IDatabaseConfig = {
         database: process.env.DB_NAME || '',
         host: process.env.DB_HOST || '127.0.0.1',
         port: Number(process.env.DB_PORT) || 5432,
-        dialect: 'postgres',
+        dialect: 'mssql',
         logging: false,
         force: true,
-        timezone: '+02:00'
+        timezone: '-02:00'
     },
     test: {
         username: process.env.DB_USER || '',
@@ -29,9 +29,9 @@ export const databaseConfig: IDatabaseConfig = {
         database: process.env.DB_NAME || '',
         host: process.env.DB_HOST || '127.0.0.1',
         port: Number(process.env.DB_PORT) || 5432,
-        dialect: 'postgres',
+        dialect: 'mssql',
         logging: true,
         force: true,
-        timezone: '+02:00'
+        timezone: '-02:00'
     }
 };
