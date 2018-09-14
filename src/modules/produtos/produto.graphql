@@ -1,0 +1,12 @@
+type Query {
+    produtos(descricao: String, limit: Int, offset: Int): [Produto]
+    produto(id: ID): Produto
+}
+
+type Produto {
+    id: Int
+    descricao: String
+    estoque: Float
+    valor: Float
+    vendaItens: [VendaItem] 
+}

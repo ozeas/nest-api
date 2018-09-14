@@ -1,37 +1,37 @@
-import { IDatabaseConfig } from './interfaces/data-base.interface';
+import { IDatabaseConfig } from "./interfaces/data-base.interface";
 
 export const databaseConfig: IDatabaseConfig = {
     development: {
-        username: process.env.DB_USER || '',
-        password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_NAME || '',
-        host: process.env.DB_HOST || '127.0.0.1',
-        port: Number(process.env.DB_PORT) || 5432,
-        dialect: 'mssql',
-        logging: false,
+        database: process.env.DB_NAME || "datateste",
+        dialect: "mssql",
         force: true,
-        timezone: '-02:00'
+        host: process.env.DB_HOST || "192.168.0.244",
+        logging: false,
+        password: process.env.DB_PASSWORD || "123456789",
+        port: Number(process.env.DB_PORT) || 1433,
+        timezone: "-02:00",
+        username: process.env.DB_USER || "sa",
     },
     production: {
-        username: process.env.DB_USER || '',
-        password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_NAME || '',
-        host: process.env.DB_HOST || '127.0.0.1',
-        port: Number(process.env.DB_PORT) || 5432,
-        dialect: 'mssql',
-        logging: false,
+        database: process.env.DB_NAME || "datateste",
+        dialect: "mssql",
         force: true,
-        timezone: '-02:00'
+        host: process.env.DB_HOST || "192.168.0.244",
+        logging: false,
+        password: process.env.DB_PASSWORD || "123456789",
+        port: Number(process.env.DB_PORT) || 1433,
+        timezone: "-02:00",
+        username: process.env.DB_USER || "sa",
     },
     test: {
-        username: process.env.DB_USER || '',
-        password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_NAME || '',
-        host: process.env.DB_HOST || '127.0.0.1',
-        port: Number(process.env.DB_PORT) || 5432,
-        dialect: 'mssql',
-        logging: true,
+        database: process.env.DB_NAME || "datateste",
+        dialect: "mssql",
         force: true,
-        timezone: '-02:00'
-    }
+        host: process.env.DB_HOST || "192.168.0.244",
+        logging: false,
+        password: process.env.DB_PASSWORD || "123456789",
+        port: Number(process.env.DB_PORT) || 1433,
+        timezone: "-02:00",
+        username: process.env.DB_USER || "sa",
+    },
 };

@@ -1,0 +1,13 @@
+type Query {
+    vendaItens(venda_id: Int, limit: Int, offset: Int): [VendaItem]
+    vendaItem(id: ID): VendaItem
+}
+
+type VendaItem {
+    id: Int
+    venda_id: Int
+    produto_id: Int
+    unitario: String
+    quantidade: String
+    total: String
+}

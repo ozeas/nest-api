@@ -1,34 +1,43 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { IProdutoService } from './interfaces/produto-service.interface';
+import { Inject, Injectable } from "@nestjs/common";
+import { VendaItem } from "../venda_item/venda_item.entity";
+import { IProdutoService } from "./interfaces/produto-service.interface";
 
 @Injectable()
 export class ProdutoService implements IProdutoService {
   constructor(
-    @Inject('ProdutoRepository') private readonly _repository
+    @Inject("ProdutoRepository") private readonly repository,
   ) {}
 
-  public async getAll(options?: Object) {
-    return await this._repository.findAll(options);
-  }
-
-  public async getOne(options: Object) {
-    return await this._repository.findAll(options);
+  public async getAll(options?: any) {
+    options.include = [VendaItem];
+    return await this.repository.findAll(options);
   }
 
   public async get(id: number) {
-    return await this._repository.findById(id);
+    return await this.repository.findById(id);
   }
 
-  public async create(produto: Object) {
-    return await this._repository.create(produto);
+  public async create(produto: object) {
+    try {
+      return await this.repository.create(produto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   public async update(id: number, produto: object) {
-    return await this._repository.update(id, produto);
+    try {
+      return await this.repository.update(id, produto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   public async delete(id: number) {
-    return await this._repository.delete(id);
+    try {
+      return await this.repository.delete(id);
+    } catch (error) {
+      throw error;
+    }
   }
 }
-

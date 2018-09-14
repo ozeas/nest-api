@@ -1,19 +1,31 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 dotenv.config();
 
-import { NestFactory } from '@nestjs/core';
-import { DispatchError } from './shared/filters/dispatch-error';
-import { ApplicationModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { ApplicationModule } from "./app.module";
+// import { DispatchError } from "./shared/filters/dispatch-error";
 
 declare const module: any;
 
 async function bootstrap(): Promise<any> {
     const app = await NestFactory.create(ApplicationModule);
+
+    const options = new DocumentBuilder()
+        .setTitle("AdSoft - API NestJs")
+        .setDescription("Estrutura de api usada pela AdSoft com NodeJs")
+        .setVersion("0.001")
+        .addTag("adsoft-api")
+        .build();
+
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup("api", app, document);
+
     // app.useGlobalFilters(new DispatchError());
     app.useGlobalPipes(new ValidationPipe({
+        dismissDefaultMessages: false,
         transform: true,
-        dismissDefaultMessages: false
     }));
     await app.listen(3000);
 

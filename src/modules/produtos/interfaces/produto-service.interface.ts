@@ -1,11 +1,7 @@
-import { Produto } from '../produto.entity';
-import { IProduto } from '../interfaces/index';
-
-export interface IProdutoService { 
-  getAll(options: Object),
-  getOne(options: Object),
-  get(id: number),
-  create(data: Object),
-  update(id: number, data: Object),
-  delete(id: number)
+export interface IProdutoService {
+  create(data: object);
+  delete(id: number);
+  getAll(options: object);
+  get(id: number);
+  update(id: number, data: object);
 }

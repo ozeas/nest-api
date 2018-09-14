@@ -1,5 +1,6 @@
 export interface IProduto {
-  descricao: string,
-  valor: number,
-  estoque: number
+  descricao: string;
+  estoque: number;
+  id?: number;
+  valor: number;
 }

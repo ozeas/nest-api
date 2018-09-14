@@ -5,7 +5,7 @@ export interface IDatabaseConfigAttributes {
     host: string;
     port: number;
     dialect: string;
-    logging: boolean | Function;
+    logging: boolean | (() => void);
     force: boolean;
     timezone: string;
 }
