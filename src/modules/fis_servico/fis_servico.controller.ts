@@ -11,36 +11,32 @@ import {
   Put,
   Query,
   Res,
-  UseGuards,
 } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
 import { ApiForbiddenResponse, ApiResponse } from "@nestjs/swagger";
-import * as Message from "../../shared/messages/message-code-success";
-import { ProdutoService } from "./produto.service";
-import {
-  CreateProdutoValidate,
-  UpdateProdutoValidate,
-} from "./validators";
+// import * as Message from "../../shared/messages/message-code-success";
+import { RotinasCodigos } from "../../shared/config/rotinas-codigos";
+import { FisServicoService } from "./fis_servico.service";
+import { Roles } from "./roles.decorator";
 
 @Controller()
 @Catch(HttpException)
-// @UseGuards(AuthGuard())
-export class ProdutoController {
-  constructor(private readonly produtoService: ProdutoService) {}
+export class FisServicoController {
+  constructor(private readonly fisServicoService: FisServicoService) {}
 
-  @ApiResponse({ status: 200, description: "Produto[{}]" })
-  @Get("produtos")
+  @ApiResponse({ status: 200, description: "Fis Servico[{}]" })
+  @Get("servicos")
+  @Roles(RotinasCodigos.servico.LIST_ALL)
   public async index(@Res() res, @Query() options) {
-    const produtos = await this.produtoService.getAll(options);
-    return res.status(HttpStatus.OK).json(produtos);
+    const fisServico = await this.fisServicoService.getAll(options);
+    return res.status(HttpStatus.OK).json(fisServico);
   }
 
-  @ApiResponse({ status: 201, description: "Criado com sucesso"})
+ /*  @ApiResponse({ status: 201, description: "Criado com sucesso"})
   @ApiForbiddenResponse({ description: "Houve um erro ao criar o objeto"})
-  @Post("produtos")
+  @Post("fis_servico")
   public async create(@Res() res, @Body() produto: CreateProdutoValidate) {
     try {
-      await this.produtoService.create(produto);
+      await this.fisServicoService.create(produto);
       return res.status(HttpStatus.CREATED).json(Message.CRIADO);
     } catch (error) {
       return res.status(HttpStatus.BAD_GATEWAY).json(error);
@@ -50,7 +46,7 @@ export class ProdutoController {
   @ApiResponse({ status: 200, description: "Produto{}" })
   @Get("produtos/:id")
   public async show(@Res() res, @Param("id") id: number) {
-    const produto = await this.produtoService.get(id);
+    const produto = await this.fisServicoService.get(id);
     return res.status(HttpStatus.OK).json(produto);
   }
 
@@ -59,7 +55,7 @@ export class ProdutoController {
   @Put("produtos/:id")
   public async update(@Res() res, @Body() produto: UpdateProdutoValidate, @Param("id") id: number) {
     try {
-      await this.produtoService.update(id, produto);
+      await this.fisServicoService.update(id, produto);
       return res.status(HttpStatus.OK).json(Message.ATUALIZADO);
     } catch (error) {
       return res.status(HttpStatus.BAD_GATEWAY).json(error);
@@ -71,10 +67,10 @@ export class ProdutoController {
   @Delete("produtos/:id")
   public async delete(@Res() res, @Param("id") id: number) {
     try {
-      await this.produtoService.delete(id);
+      await this.fisServicoService.delete(id);
       return res.status(HttpStatus.ACCEPTED).json(Message.DELETADO);
     } catch (error) {
       return res.status(HttpStatus.BAD_GATEWAY).json(error);
     }
-  }
+  } */
 }

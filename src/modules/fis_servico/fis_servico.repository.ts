@@ -1,27 +1,27 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
-import { IProduto, IProdutoRepository } from "./interfaces/index";
-import { Produto } from "./produto.entity";
+import { FisServico } from "./fis_servico.entity";
+import { IFisServico, IFisServicoRepository } from "./interfaces/index";
 
 @Injectable()
-export class ProdutoRepository implements IProdutoRepository {
+export class FisServicoRepository implements IFisServicoRepository {
   constructor(
-    @Inject("ProdutoModel") private readonly produtoRepository: typeof Produto,
+    @Inject("FisServicoModel") private readonly fisServicoRepository: typeof FisServico,
     @Inject("SequelizeInstance") private readonly sequelizeInstance,
   ) {}
 
-  public async findAll(options: any): Promise<Produto[]> {
-    return await this.produtoRepository.findAll<Produto>(options);
+  public async findAll(options: any): Promise<FisServico[]> {
+    return await this.fisServicoRepository.findAll<FisServico>(options);
   }
 
-  public async findById(id: number): Promise<Produto | null> {
-    return await this.produtoRepository.findById<Produto>(id);
+  public async findById(id: number): Promise<FisServico | null> {
+    return await this.fisServicoRepository.findById<FisServico>(id);
   }
 
-  public async create(produto: IProduto): Promise<Produto> {
+  public async create(produto: IFisServico): Promise<FisServico> {
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
-        return await this.produtoRepository.create<Produto>(produto, {
+        return await this.fisServicoRepository.create<FisServico>(produto, {
             returning: true,
             transaction,
         });
@@ -31,9 +31,9 @@ export class ProdutoRepository implements IProdutoRepository {
     }
   }
 
-  public async update(id: number, data: IProduto): Promise<Produto | null> {
+  public async update(id: number, data: IFisServico): Promise<FisServico | null> {
     return await this.sequelizeInstance.transaction(async (transaction) => {
-      const  produto = await this.produtoRepository.findById<Produto>(id, {
+      const  produto = await this.fisServicoRepository.findById<FisServico>(id, {
         transaction,
       });
 
@@ -41,14 +41,14 @@ export class ProdutoRepository implements IProdutoRepository {
         throw new MessageCodeError("generic:onUpdate");
       }
 
-      return await Produto.update(data, {where: {id}, transaction});
+      return await FisServico.update(data, {where: {id}, transaction});
     });
   }
 
   public async delete(id: number): Promise<void> {
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
-        return await this.produtoRepository.destroy({
+        return await this.fisServicoRepository.destroy({
           transaction,
           where: { id },
         });

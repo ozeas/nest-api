@@ -1,8 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { databaseConfig } from "../../shared/index";
-// import { User } from "../users/user.entity";
-import { Produto } from "../produtos/produto.entity";
-import { VendaItem } from "../venda_item/venda_item.entity";
+import { FisServico } from "../fis_servico/fis_servico.entity";
+import { UsuarioPerfil } from "../users/user.entity";
 
 export const databaseProvider = {
     provide: "SequelizeInstance",
@@ -22,7 +21,7 @@ export const databaseProvider = {
 
         const sequelize = new Sequelize(config);
 
-        sequelize.addModels([ Produto, VendaItem ]);
+        sequelize.addModels([ FisServico, UsuarioPerfil ]);
 
         // sequelize.addModels([User]);
         /* await sequelize.sync(); add this if you want to sync model and DB.*/

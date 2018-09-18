@@ -1,27 +1,22 @@
 import { Module } from "@nestjs/common";
-// import { UserModule } from "./modules/users/user.module";
-import { GraphQLModule } from "@nestjs/graphql";
-import { join } from "path";
+import { APP_GUARD } from "@nestjs/core";
+import { RolesGuard } from "./modules/auth/auth.guard";
 import { AuthModule } from "./modules/auth/auth.module";
-import { ProdutoModule } from "./modules/produtos/produto.module";
-import { VendaItemModule } from "./modules/venda_item/venda_item.module";
+import { FisServicoModule } from "./modules/fis_servico/fis_servico.module";
+import { UserModule } from "./modules/users/user.module";
 
 @Module({
     controllers: [],
     imports: [
-        ProdutoModule,
+        FisServicoModule,
         AuthModule,
-        GraphQLModule.forRoot({
-            debug: false,
-            definitions: {
-                outputAs: "class",
-                path: join(process.cwd(), "src/graphql.schema.ts"),
-            },
-            installSubscriptionHandlers: true,
-            playground: true,
-            typePaths: ["./**/*.graphql"],
-        }),
-        VendaItemModule,
+        UserModule,
+    ],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: RolesGuard,
+        },
     ],
 })
 export class ApplicationModule {}

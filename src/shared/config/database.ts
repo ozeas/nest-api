@@ -2,7 +2,7 @@ import { IDatabaseConfig } from "./interfaces/data-base.interface";
 
 export const databaseConfig: IDatabaseConfig = {
     development: {
-        database: process.env.DB_NAME || "datateste",
+        database: process.env.DB_NAME || "dataplus",
         dialect: "mssql",
         force: true,
         host: process.env.DB_HOST || "192.168.0.244",
@@ -13,7 +13,7 @@ export const databaseConfig: IDatabaseConfig = {
         username: process.env.DB_USER || "sa",
     },
     production: {
-        database: process.env.DB_NAME || "datateste",
+        database: process.env.DB_NAME || "dataplus",
         dialect: "mssql",
         force: true,
         host: process.env.DB_HOST || "192.168.0.244",
@@ -24,7 +24,7 @@ export const databaseConfig: IDatabaseConfig = {
         username: process.env.DB_USER || "sa",
     },
     test: {
-        database: process.env.DB_NAME || "datateste",
+        database: process.env.DB_NAME || "dataplus",
         dialect: "mssql",
         force: true,
         host: process.env.DB_HOST || "192.168.0.244",

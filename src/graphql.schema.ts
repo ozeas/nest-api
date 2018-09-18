@@ -6,18 +6,16 @@ export class Produto {
     vendaItens?: VendaItem[];
 }
 
-export class IQuery {
-    produtos(descricao?: string, limit?: number, offset?: number): Produto[] | Promise<Produto[]> {
-    }
+export abstract class IQuery {
+    abstract produtos(descricao?: string, limit?: number, offset?: number): Produto[] | Promise<Produto[]>;
 
-    produto(id?: string): Produto | Promise<Produto> {
-    }
+    abstract produto(id?: string): Produto | Promise<Produto>;
 
-    vendaItens(venda_id?: number, limit?: number, offset?: number): VendaItem[] | Promise<VendaItem[]> {
-    }
+    abstract vendaItens(venda_id?: number, limit?: number, offset?: number): VendaItem[] | Promise<VendaItem[]>;
 
-    vendaItem(id?: string): VendaItem | Promise<VendaItem> {
-    }
+    abstract vendaItem(id?: string): VendaItem | Promise<VendaItem>;
+
+    abstract temp__(): boolean | Promise<boolean>;
 }
 
 export class VendaItem {

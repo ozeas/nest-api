@@ -1,13 +1,13 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { IVendaItemService } from "./interfaces/venda_item-service.interface";
+import { IFisServicoService } from "./interfaces/fis_servico-service.interface";
 
 @Injectable()
-export class VendaItemService implements IVendaItemService {
+export class FisServicoService implements IFisServicoService {
   constructor(
-    @Inject("VendaItemRepository") private readonly repository,
+    @Inject("FisServicoRepository") private readonly repository,
   ) {}
 
-  public async getAll(options?: object) {
+  public async getAll(options?: any) {
     return await this.repository.findAll(options);
   }
 

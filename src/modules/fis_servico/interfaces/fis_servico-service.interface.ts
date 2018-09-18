@@ -1,4 +1,4 @@
-export interface IProdutoService {
+export interface IFisServicoService {
   create(data: object);
   delete(id: number);
   getAll(options: object);
