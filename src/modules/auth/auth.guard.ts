@@ -27,8 +27,10 @@ export class RolesGuard implements CanActivate {
      */
     public canActivate(context: ExecutionContext): boolean {
         const regras = this.reflector.get<string>("roles", context.getHandler());
+        /* tslint:disable */
+        console.log(regras);
         if (!regras) {
-            return false;
+            return true;
         }
 
         const request = context.switchToHttp().getRequest();
