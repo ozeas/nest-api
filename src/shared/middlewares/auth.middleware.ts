@@ -9,8 +9,9 @@ import { errorMessagesConfig } from "../config/error-message";
 @Injectable()
 
 export class AuthMiddleware implements NestMiddleware {
-    /**
+    /**ss
      * Resolves auth middleware
+     * @description middleware de validação do token jwt
      * @returns Request JSON | Next
      */
     public resolve() {
@@ -39,6 +40,7 @@ export class AuthMiddleware implements NestMiddleware {
     /**
      * Gets error
      *
+     * @description retorna mensagem padrão de error
      * @returns Object
      */
     public get error() {
@@ -47,7 +49,8 @@ export class AuthMiddleware implements NestMiddleware {
 
     /**
      * Decodificas token
-     * @param token
+     * @param token JWT
+     * @description verifica a validade e decodifica o token
      * @returns Object
      * @throws Invalid token
      */
@@ -62,15 +65,18 @@ export class AuthMiddleware implements NestMiddleware {
     /**
      * Verificas headers
      * @param req
+     * @description verifica a existência de token jwt bearer no header
      * @returns true if headers
      */
     public verificaHeaders(req): boolean {
-        return req.headers.authorization && (req.headers.authorization as string).split(" ")[0] === "Bearer";
+        const bearer = (req.headers.authorization as string).split(" ")[0] === "Bearer";
+        return req.headers.authorization && bearer;
     }
 
     /**
      * Obtems perfil
      * @param decoded
+     * @description tenta obter perfil do usuários a partir dos dado do token
      * @returns UsuarioPerfil | null
      */
     public async obtemPerfil(decoded): Promise<UsuarioPerfil[]> {
