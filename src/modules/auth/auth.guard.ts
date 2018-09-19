@@ -7,6 +7,8 @@ import { Reflector } from "@nestjs/core";
 
 /**
  * Injectable
+ *
+ * @description Classe co lógica de filtro para permissão permissão de rotina
  */
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -20,6 +22,7 @@ export class RolesGuard implements CanActivate {
     /**
      * Determines whether activate can
      * @param context
+     * @description obtém o código da rotina e verifica no perfil do usuário
      * @returns true if activate
      */
     public canActivate(context: ExecutionContext): boolean {
@@ -39,6 +42,7 @@ export class RolesGuard implements CanActivate {
      * Verificas permissao
      * @param perfil
      * @param regras
+     * @description verifica se a regra existe no perfil informado
      * @returns true if permissao
      */
     public verificaPermissao(perfil, regras): boolean {
