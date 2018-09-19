@@ -24,6 +24,8 @@ npm-debug.log
 
 # build
 /build
+dist/**/*
+dist/
 
 # tests
 /coverage

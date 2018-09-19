@@ -1,0 +1,217 @@
+/* tslint:disable */
+export const planoItemConfig = [
+  [
+    {
+      "nomeCampo": "srvServicoId",
+      "titulo": "Serviço",
+      "subtitulo": "Serviço incluído pelo plano",
+      "valorPadrao": null,
+      "editavel": true,
+      "obrigatorio": true,
+      "visivel": true,
+      "tipoDado": null,
+      "ordem": 0,
+      "isChavePrimaria": false,
+      "isChaveEstrangeira": false,
+      "nomeColuna": "srvServicoId",
+      "include": null,
+      "views": [
+        "viewInsert",
+        "viewUpdate",
+        "viewVisualizacao"
+      ],
+      "expandOdata": false,
+      "selectOdata": false,
+      "noFilter": false,
+      "conditionSql": false,
+      "conditionSqlIfTrue": null,
+      "conditionSqlIfFalse": null,
+      "filtro": null,
+      "componente": {
+        "tipo": "comboEdit",
+        "recurso": "http://localhost:3000/api/fake/servico/lista/combo",
+        "comboSemChave": true
+      },
+      "dicionario": null,
+      "enumList": false
+    },
+    {
+      "nomeCampo": "quantidade",
+      "titulo": "Quantidade",
+      "subtitulo": "Quantidade do serviço",
+      "valorPadrao": null,
+      "editavel": true,
+      "obrigatorio": true,
+      "visivel": true,
+      "tipoDado": "inteiro",
+      "ordem": 0,
+      "isChavePrimaria": false,
+      "isChaveEstrangeira": false,
+      "nomeColuna": "quantidade",
+      "include": null,
+      "views": [
+        "viewInsert",
+        "viewUpdate",
+        "viewVisualizacao"
+      ],
+      "expandOdata": false,
+      "selectOdata": false,
+      "noFilter": false,
+      "conditionSql": false,
+      "conditionSqlIfTrue": null,
+      "conditionSqlIfFalse": null,
+      "filtro": null,
+      "componente": {
+        "tipo": "valorEdit",
+        "ocultarSeparadorCasas": true,
+        "permiteNumeroNegativo": false,
+        "casasDecimais": 0,
+        "valorMinimo": 0,
+        "valorMaximo": 0
+      },
+      "dicionario": null,
+      "enumList": null
+    },
+    {
+      "nomeCampo": "valorBruto",
+      "titulo": "Valor",
+      "subtitulo": "Valor Bruto do serviço",
+      "valorPadrao": null,
+      "editavel": true,
+      "obrigatorio": true,
+      "visivel": true,
+      "tipoDado": null,
+      "ordem": 0,
+      "isChavePrimaria": false,
+      "isChaveEstrangeira": false,
+      "nomeColuna": "valorBruto",
+      "include": null,
+      "views": [
+        "viewInsert",
+        "viewUpdate",
+        "viewVisualizacao"
+      ],
+      "expandOdata": false,
+      "selectOdata": false,
+      "noFilter": false,
+      "conditionSql": false,
+      "conditionSqlIfTrue": null,
+      "conditionSqlIfFalse": null,
+      "filtro": null,
+      "componente": {
+        "tipo": "moedaEdit",
+        "casasDecimais": 2,
+        "ocultarSeparadorCasas": false,
+        "valorMinimo": 0,
+        "valorMaximo": 0
+      },
+      "dicionario": null,
+      "enumList": null
+    },
+    {
+      "nomeCampo": "valorDesconto",
+      "titulo": "Desconto",
+      "subtitulo": "Valor de desconto aplicado ao serviço",
+      "valorPadrao": null,
+      "editavel": true,
+      "obrigatorio": true,
+      "visivel": true,
+      "tipoDado": null,
+      "ordem": 0,
+      "isChavePrimaria": false,
+      "isChaveEstrangeira": false,
+      "nomeColuna": "valor_desconto",
+      "include": null,
+      "views": [
+        "viewInsert",
+        "viewUpdate",
+        "viewVisualizacao"
+      ],
+      "expandOdata": false,
+      "selectOdata": false,
+      "noFilter": false,
+      "conditionSql": false,
+      "conditionSqlIfTrue": null,
+      "conditionSqlIfFalse": null,
+      "filtro": null,
+      "componente": {
+        "tipo": "moedaEdit",
+        "casasDecimais": 2,
+        "ocultarSeparadorCasas": false,
+        "valorMinimo": 0,
+        "valorMaximo": 0
+      },
+      "dicionario": null,
+      "enumList": null
+    },
+    {
+      "nomeCampo": "valorTotal",
+      "titulo": "Total",
+      "subtitulo": "Valor total do serviço abatido o desconto",
+      "valorPadrao": null,
+      "editavel": true,
+      "obrigatorio": true,
+      "visivel": true,
+      "tipoDado": null,
+      "ordem": 0,
+      "isChavePrimaria": false,
+      "isChaveEstrangeira": false,
+      "nomeColuna": "valorTotal",
+      "include": null,
+      "views": [
+        "viewInsert",
+        "viewUpdate",
+        "viewVisualizacao"
+      ],
+      "expandOdata": false,
+      "selectOdata": false,
+      "noFilter": false,
+      "conditionSql": false,
+      "conditionSqlIfTrue": null,
+      "conditionSqlIfFalse": null,
+      "filtro": null,
+      "componente": {
+        "tipo": "moedaEdit",
+        "casasDecimais": 2,
+        "ocultarSeparadorCasas": false,
+        "valorMinimo": 0,
+        "valorMaximo": 0
+      },
+      "dicionario": null,
+      "enumList": null
+    },
+    {
+      "nomeCampo": "dataHoraInclusao",
+      "titulo": "Data hora inclusão",
+      "subtitulo": "Data e hora de inclusão do serviço no plano",
+      "valorPadrao": null,
+      "editavel": true,
+      "obrigatorio": false,
+      "visivel": true,
+      "tipoDado": "datahora",
+      "ordem": 0,
+      "isChavePrimaria": false,
+      "isChaveEstrangeira": false,
+      "nomeColuna": "dataHoraInclusao",
+      "include": null,
+      "views": [
+        "viewInsert",
+        "viewUpdate",
+        "viewVisualizacao"
+      ],
+      "expandOdata": false,
+      "selectOdata": true,
+      "noFilter": false,
+      "conditionSql": false,
+      "conditionSqlIfTrue": null,
+      "conditionSqlIfFalse": null,
+      "filtro": null,
+      "componente": {
+        "tipo": "dateEdit",
+        "typeId": "Framework.DataValidations.DataEditAttribute, FrameWork, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      "dicionario": null,
+      "enumList": null
+    }
+  ]
+];
