@@ -15,8 +15,8 @@ import {
 import { ApiForbiddenResponse, ApiResponse } from "@nestjs/swagger";
 // import * as Message from "../../shared/messages/message-code-success";
 import { RotinasCodigos } from "../../shared/config/rotinas-codigos";
+import { Roles } from "../auth/roles.decorator";
 import { FisServicoService } from "./fis_servico.service";
-import { Roles } from "./roles.decorator";
 
 @Controller()
 @Catch(HttpException)

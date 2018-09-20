@@ -3,6 +3,8 @@ import * as jwt from "jsonwebtoken";
 import { UsuarioPerfil } from "../../modules/users/user.entity";
 import { errorMessagesConfig } from "../config/error-message";
 
+/* tslint:disable:no-console */
+
 /**
  * Injectable
  */
@@ -19,7 +21,7 @@ export class AuthMiddleware implements NestMiddleware {
             if (this.verificaHeaders(req)) {
                 const token = (req.headers.authorization as string).split(" ")[1];
 
-                const decoded = this.decodificaToken(token);
+                const decoded: any = this.decodificaToken(token);
                 if (!decoded) {
                     return res.status(403).json(this.error);
                 }
@@ -29,7 +31,13 @@ export class AuthMiddleware implements NestMiddleware {
                     return res.status(403).json(this.error);
                 }
 
-                req.perfil = {roles: perfil};
+                req.perfil = {
+                    roles: perfil,
+                };
+
+                req.body.pct_usuario_id = decoded.pct_usuario_id;
+                req.body.int_empresa_id = decoded.int_empresa_id;
+
                 next();
             } else {
                 return res.status(403).json(this.error);
@@ -69,6 +77,10 @@ export class AuthMiddleware implements NestMiddleware {
      * @returns true if headers
      */
     public verificaHeaders(req): boolean {
+        if (!req.headers.authorization) {
+            return false;
+        }
+
         const bearer = (req.headers.authorization as string).split(" ")[0] === "Bearer";
         return req.headers.authorization && bearer;
     }

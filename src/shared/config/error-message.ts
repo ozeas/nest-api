@@ -1,35 +1,34 @@
 import { HttpStatus } from "@nestjs/common";
-import { IErrorMessages } from "./interfaces/error-message.interface";
+import { IMessages } from "./interfaces/message.interface";
 
-export const errorMessagesConfig: { [messageCode: string]: IErrorMessages } = {
+import {
+    errorMessagesGrupoServico,
+    errorMessagesServico,
+} from "../../modules/shared/errors";
+
+export const errorMessagesConfig: { [messageCode: string]: IMessages } = {
     "generic:notFound": {
-        errorMessage: "Objeto não encontrado",
-        httpStatus: HttpStatus.NOT_FOUND,
-        type: "notFound",
-        userMessage: "",
-    },
-    "generic:onCreate": {
-        errorMessage: "Houve um erro ao criar o objeto.",
-        httpStatus: HttpStatus.BAD_REQUEST,
-        type: "onCreate",
-        userMessage: "",
-    },
-    "generic:onDelete": {
-        errorMessage: "Houve um erro ao excluir o objeto.",
-        httpStatus: HttpStatus.BAD_REQUEST,
-        type: "onDelete",
-        userMessage: "",
-    },
-    "generic:onUpdate": {
-        errorMessage: "Houve um erro ao editar o objeto.",
-        httpStatus: HttpStatus.BAD_REQUEST,
-        type: "onUpdate",
-        userMessage: "",
+        codigo: HttpStatus.NOT_FOUND,
+        motivo: "Objeto não encontrado no banco de dados",
+        solucao: "Informe um dados válido",
+        tipo: "notFound",
+        titulo: "Objeto não encontrado",
     },
     "request:unauthorized": {
-        errorMessage: "Acesso não autorizado.",
-        httpStatus: HttpStatus.UNAUTHORIZED,
-        type: "unauthorized",
-        userMessage: "Acesso não autorizado.",
+        codigo: HttpStatus.UNAUTHORIZED,
+        motivo: "Acesso não autorizado.",
+        solucao: "Informe um login válido",
+        tipo: "unauthorized",
+        titulo: "Acesso não autorizado.",
     },
+    "request:unauthorized:routine": {
+        codigo: HttpStatus.FORBIDDEN,
+        motivo: "Este usuário não tem permissão para executar essa ação.",
+        solucao: "Contate o administrador do sistema.",
+        tipo: "forbidden",
+        titulo: "Sem permissão.",
+    },
+
+    ...errorMessagesGrupoServico,
+    ...errorMessagesServico,
 };
