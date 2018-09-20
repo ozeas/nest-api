@@ -1,9 +1,11 @@
 import {
     CanActivate,
     ExecutionContext,
+    HttpException,
     Injectable,
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
+import { errorMessagesConfig } from "../../shared/config/error-message";
 
 /**
  * Injectable
@@ -36,7 +38,12 @@ export class RolesGuard implements CanActivate {
         const perfil = request.perfil;
         const permissao = this.verificaPermissao(perfil, regras);
 
-        return perfil && perfil.roles && permissao;
+        if (!(perfil && perfil.roles && permissao)) {
+            throw new HttpException(
+                errorMessagesConfig["request:unauthorized:routine"],
+                403,
+            );
+        }
     }
 
     /**

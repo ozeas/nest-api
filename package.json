@@ -26,7 +26,7 @@
   },
   "scripts": {
     "format": "prettier --write --parser typescript \"**/*.ts\"",
-    "migrate": "ts-node migrate.ts",    
+    "migrate": "ts-node migrate.ts",
     "start": "nodemon dist/server.js --env=NODE_ENV",
     "test": "jest",
     "test:cov": "jest --coverage",
@@ -58,6 +58,7 @@
     "graphql-type-json": "^0.1.4",
     "jest": "^22.4.3",
     "magical-mixin": "^0.1.0",
+    "moment": "^2.22.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "prettier": "^1.13.7",
