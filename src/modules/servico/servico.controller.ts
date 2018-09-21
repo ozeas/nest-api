@@ -23,7 +23,7 @@ import { ServicoService } from "./servico.service";
  */
 @Controller()
 @Catch(HttpException)
-export class GrupoServicoController {
+export class ServicoController {
   /**
    * Creates an instance of grupo servico controller.
    * @param servicoService
@@ -43,5 +43,81 @@ export class GrupoServicoController {
     return res.status(HttpStatus.OK).json(servico);
   }
 
-  
+
+  /**
+   * Apis response
+   * @param res
+   * @param req
+   * @param servico
+   * @description Cria um serviço
+   * @returns JSON
+   */
+  @ApiResponse({status: 201, description: "Serviço criado com sucesso"})
+  @ApiForbiddenResponse({description: "Houve um erro ao criar o serviço"})
+  @Post("servicos")
+  public async create(@Res() res, @Req() req, @Body() servico) {
+    try {
+      await this.servicoService.create(servico);
+    } catch (error) {
+      return res.status(HttpStatus.BAD_GATEWAY).json(error);
+    }
+    return res.status(HttpStatus.CREATED)
+              .json(successMessageServico["servico:create:ok"]);
+  }
+
+
+  /**
+   * Apis response
+   * @param res
+   * @param id
+   * @description Retorna um serviço
+   * @returns JSON
+   */
+  @ApiResponse({ status: 200, description: "Servico" })
+  @Get("servicos/:id")
+  public async show(@Res() res, @Param("id") id: number) {
+    const servico = await this.servicoService.get(id);
+    return res.status(HttpStatus.OK).json(servico);
+  }
+
+
+  /**
+   * Apis response
+   * @param res
+   * @param req
+   * @param servico
+   * @param id
+   * @description Atualiza um serviço
+   * @returns JSON
+   */
+  @ApiResponse({ status: 200, description: "Atualizado com sucesso"})
+  @ApiForbiddenResponse({description: "Houve um erro ao editar os dados"})
+  @Put("servicos/:id")
+  public async update(@Res() res, @Req() req, @Body() servico, @Param("id") id: number) {
+    try {
+      await this.servicoService.update(id, servico);
+      return res.status(HttpStatus.OK).json(successMessageServico["servico:update:ok"]);
+    } catch (error) {
+      return res.status(HttpStatus.BAD_GATEWAY).json(error);
+    }
+  }
+
+  /**
+   * Apis response
+   * @param res
+   * @param id
+   * @description Exclui um serviço
+   * @returns JSON
+   */
+  @ApiResponse({ status: 202, description: "Excluído com sucesso"})
+  @ApiForbiddenResponse({ description: "Houve um erro ao excluir os dados" })
+  @Delete("servicos/:id")
+  public async delete(@Res() res, @Param("id") id: number) {
+    try {
+      await this.servicoService.delete(id);
+      return res.status(HttpStatus.ACCEPTED).json(successMessageServico["servico:delete:ok"]);
+    } catch (error) {
+      return res.status(HttpStatus.BAD_GATEWAY).json(error);
+    }
+  }
 }
