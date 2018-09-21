@@ -58,6 +58,14 @@ export const errorMessagesServico: { [messageCode: string]: IMessages } = {
       titulo: "O Valor não pode ser vazio",
     },
 
+    "servico:valida:valor:conteudo": {
+      codigo: HttpStatus.BAD_REQUEST,
+      motivo: "É preciso informar um valor válido",
+      solucao: "Preencha o campo valor",
+      tipo: "BadRequest",
+      titulo: "O Valor não pode ser vazio",
+    },
+
     "servico:valida:prefixo": {
       codigo: HttpStatus.BAD_REQUEST,
       motivo: "É preciso informar um valor válido no campo descrição",

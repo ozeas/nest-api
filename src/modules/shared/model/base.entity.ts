@@ -4,22 +4,22 @@
 const moment = require("moment");
 
 import {
+  BeforeBulkUpdate,
   BeforeCreate,
   BeforeSave,
-  BeforeUpdate,
   Column,
   Model } from "sequelize-typescript";
 
 export class Base extends Model<Base> {
   @BeforeCreate
   public static setDatesCreate(instance: Base) {
-    instance.log_criacao = moment().format("MM-DD-YYYY HH:mm");
-    instance.log_atualizacao = moment().format("MM-DD-YYYY HH:mm");
+    instance.log_criacao = moment().format("MM-DD-YYYY HH:mm:ss:SSS");
+    instance.log_atualizacao = moment().format("MM-DD-YYYY HH:mm:ss:SSS");
   }
 
-  @BeforeUpdate
+  @BeforeBulkUpdate
   public static setDateUpdate(instance: Base) {
-    instance.log_atualizacao = moment().format("MM-DD-YYYY HH:mm");
+    instance.log_atualizacao = moment().format("MM-DD-YYYY HH:mm:ss:SSS");
   }
 
   @Column

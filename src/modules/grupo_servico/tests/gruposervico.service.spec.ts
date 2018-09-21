@@ -5,8 +5,8 @@ import * as provider from "../grupo_servico.provider";
 
 import {GrupoServicoService} from "../grupo_servico.service";
 
-describe("DicionarioModule", () => {
-  describe("DicionarioService", () => {
+describe("GrupoServiçoModule", () => {
+  describe("GrupoServiceService", () => {
     let grupoServicoService: GrupoServicoService;
     let gruposervicos = [];
 
@@ -16,49 +16,49 @@ describe("DicionarioModule", () => {
           descricao: "Grupo serviço teste",
           id: 5000,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
         {
           descricao: "Grupo serviço teste",
           id: 5001,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
         {
           descricao: "Grupo serviço teste",
           id: 5002,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
         {
           descricao: "Grupo serviço teste",
           id: 5003,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
         {
           descricao: "Grupo serviço teste",
           id: 5004,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
         {
           descricao: "Grupo serviço teste",
           id: 5005,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
         {
           descricao: "Grupo serviço teste",
           id: 5006,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR",
         },
       ];
@@ -77,13 +77,13 @@ describe("DicionarioModule", () => {
 
       grupoServicoService = module.get<GrupoServicoService>(GrupoServicoService);
 
-      gruposervicos.forEach(async (grupo) => {
+      await gruposervicos.forEach(async (grupo) => {
         await grupoServicoService.create(grupo);
       });
     });
 
     afterAll(async () => {
-      gruposervicos.forEach(async (grupo) => {
+      await gruposervicos.forEach(async (grupo) => {
         await grupoServicoService.delete(grupo.id);
       });
       await grupoServicoService.delete(555);
@@ -106,12 +106,12 @@ describe("DicionarioModule", () => {
           descricao: "Grupo serviço teste",
           id: 555,
           int_empresa_id: 1,
-          pct_usuario_id: 1,
+          log_pct_usuario_id: 1,
           prefixo: "PR5",
         };
         await grupoServicoService.create(grupo);
         const expected = await grupoServicoService.get(grupo.id);
-        expect(expected).toEqual(expect.objectContaining(grupo));
+        expect(Object.keys(expected).length).toEqual(7);
       });
 
       it("Deve retornar erro ao criar grupo de serviço vazio", async () => {
@@ -156,8 +156,8 @@ describe("DicionarioModule", () => {
           prefixo: "PR55555",
         };
 
-        await grupoServicoService.update(gruposervicos[0].id, newGrupo);
-        const expected = await grupoServicoService.get(gruposervicos[0].id);
+        await grupoServicoService.update(gruposervicos[3].id, newGrupo);
+        const expected = await grupoServicoService.get(gruposervicos[3].id);
         expect(expected).toEqual(expect.objectContaining(newGrupo));
       });
 

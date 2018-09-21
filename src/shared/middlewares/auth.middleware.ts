@@ -35,7 +35,7 @@ export class AuthMiddleware implements NestMiddleware {
                     roles: perfil,
                 };
 
-                req.body.pct_usuario_id = decoded.pct_usuario_id;
+                req.body.log_pct_usuario_id = decoded.log_pct_usuario_id;
                 req.body.int_empresa_id = decoded.int_empresa_id;
 
                 next();

@@ -3,6 +3,7 @@ import { databaseConfig } from "../../shared/index";
 
 import { FisServico } from "../fis_servico/fis_servico.entity";
 import { GrupoServico } from "../grupo_servico/grupo_servico.entity";
+import { Servico } from "../servico/servico.entity";
 import { UsuarioPerfil } from "../users/user.entity";
 
 export const databaseProvider = {
@@ -25,6 +26,7 @@ export const databaseProvider = {
             FisServico,
             UsuarioPerfil,
             GrupoServico,
+            Servico,
         ]);
 
         // sequelize.addModels([__dirname + "/modules/**/*.entity.ts"]);

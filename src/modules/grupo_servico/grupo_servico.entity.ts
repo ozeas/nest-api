@@ -3,11 +3,13 @@ import {
   BeforeValidate,
   Column,
   DataType,
+  HasMany,
   Length,
   Table,
 } from "sequelize-typescript";
 import { IDefineOptions } from "sequelize-typescript/lib/interfaces/IDefineOptions";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
+import { Servico } from "../servico/servico.entity";
 import { Base } from "../shared/model/base.entity";
 
 const tableOptions: IDefineOptions = {
@@ -18,7 +20,7 @@ const tableOptions: IDefineOptions = {
 @Table(tableOptions)
 export class GrupoServico extends Base {
   @BeforeValidate
-  public static validateRequireds(instance: GrupoServico) {
+  public static validateRequiridos(instance: GrupoServico) {
     const requeridos = [
       "descricao",
       "prefixo",
@@ -26,7 +28,7 @@ export class GrupoServico extends Base {
 
     requeridos.forEach((requerido) => {
       if (!instance[requerido]) {
-        throw new MessageCodeError(`servico:valida:${requerido}`);
+        throw new MessageCodeError(`gruposervico:valida:${requerido}`);
       }
     });
   }
@@ -65,5 +67,8 @@ export class GrupoServico extends Base {
   public desativado: boolean;
 
   @Column
-  public pct_usuario_id: number;
+  public log_pct_usuario_id: number;
+
+  @HasMany(() => Servico)
+  public servicos: Servico[];
 }
