@@ -37,12 +37,12 @@ export class ServicoController {
    * @returns Array de serviços
    */
   @ApiResponse({ status: 200, description: "[Servico]"})
+  @Roles(RotinasCodigos.LISTAR)
   @Get("servicos")
   public async all(@Res() res, @Query() options) {
     const servico = await this.servicoService.getAll(options);
     return res.status(HttpStatus.OK).json(servico);
   }
-
 
   /**
    * Apis response
@@ -54,6 +54,7 @@ export class ServicoController {
    */
   @ApiResponse({status: 201, description: "Serviço criado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao criar o serviço"})
+  @Roles(RotinasCodigos.INCLUIR)
   @Post("servicos")
   public async create(@Res() res, @Req() req, @Body() servico) {
     try {
@@ -65,7 +66,6 @@ export class ServicoController {
               .json(successMessageServico["servico:create:ok"]);
   }
 
-
   /**
    * Apis response
    * @param res
@@ -74,12 +74,12 @@ export class ServicoController {
    * @returns JSON
    */
   @ApiResponse({ status: 200, description: "Servico" })
+  @Roles(RotinasCodigos.LISTAR)
   @Get("servicos/:id")
   public async show(@Res() res, @Param("id") id: number) {
     const servico = await this.servicoService.get(id);
     return res.status(HttpStatus.OK).json(servico);
   }
-
 
   /**
    * Apis response
@@ -92,6 +92,7 @@ export class ServicoController {
    */
   @ApiResponse({ status: 200, description: "Atualizado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao editar os dados"})
+  @Roles(RotinasCodigos.EDITAR)
   @Put("servicos/:id")
   public async update(@Res() res, @Req() req, @Body() servico, @Param("id") id: number) {
     try {
@@ -111,6 +112,7 @@ export class ServicoController {
    */
   @ApiResponse({ status: 202, description: "Excluído com sucesso"})
   @ApiForbiddenResponse({ description: "Houve um erro ao excluir os dados" })
+  @Roles(RotinasCodigos.EXCLUIR)
   @Delete("servicos/:id")
   public async delete(@Res() res, @Param("id") id: number) {
     try {

@@ -24,7 +24,7 @@ export class FisServicoController {
   constructor(private readonly fisServicoService: FisServicoService) {}
 
   @ApiResponse({ status: 200, description: "Fis Servico[{}]" })
-  @Get("servicos")
+  @Get("fisservicos")
   @Roles(RotinasCodigos.servico.LIST_ALL)
   public async index(@Res() res, @Query() options) {
     const fisServico = await this.fisServicoService.getAll(options);

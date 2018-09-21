@@ -1,8 +1,10 @@
 /* tslint:disable:variable-name */
 import {
   BeforeValidate,
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   IsDecimal,
   Length,
   Model,
@@ -10,6 +12,7 @@ import {
 } from "sequelize-typescript";
 import { IDefineOptions } from "sequelize-typescript/lib/interfaces/IDefineOptions";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
+import { GrupoServico } from "../grupo_servico/grupo_servico.entity";
 import { Base } from "../shared/model/base.entity";
 
 const tableOptions: IDefineOptions = {
@@ -36,6 +39,13 @@ export class Servico extends Base {
     });
   }
 
+  @BeforeValidate
+  public static validaValor(instance: Servico) {
+    if (instance.valor < 0) {
+      throw new MessageCodeError(`servico:valida:valor:conteudo`);
+    }
+  }
+
   @Column({
     allowNull: false,
     autoIncrement: true,
@@ -50,6 +60,7 @@ export class Servico extends Base {
   })
   public int_empresa_id: number;
 
+  @ForeignKey(() => GrupoServico)
   @Column({
     allowNull: false,
   })
@@ -73,7 +84,6 @@ export class Servico extends Base {
     allowNull: false,
     type: DataType.DECIMAL(12, 2),
   })
-  @IsDecimal
   public valor: number;
 
   @Column({
@@ -84,5 +94,8 @@ export class Servico extends Base {
   public desativado: boolean;
 
   @Column
-  public pct_usuario_id: number;
+  public log_pct_usuario_id: number;
+
+  @BelongsTo(() => GrupoServico)
+  public grupo_servico: GrupoServico;
 }

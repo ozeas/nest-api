@@ -54,6 +54,9 @@ export class RolesGuard implements CanActivate {
      * @returns true if permissao
      */
     public verificaPermissao(perfil, regras): boolean {
+        if (!perfil && !perfil.roles) {
+            return false;
+        }
         return perfil.roles.find((role) => regras.includes(role.pct_rotina_rotina));
     }
 }

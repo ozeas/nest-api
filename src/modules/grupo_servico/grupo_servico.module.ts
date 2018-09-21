@@ -32,6 +32,7 @@ export class GrupoServicoModule {
       .forRoutes(
         {path: "/gruposervicos", method: RequestMethod.GET},
         { path: "/gruposervicos", method: RequestMethod.POST},
+        { path: "/gruposervicos/:id", method: RequestMethod.GET},
         { path: "/gruposervicos/:id", method: RequestMethod.PUT},
         { path: "/gruposervicos/:id", method: RequestMethod.DELETE },
       );

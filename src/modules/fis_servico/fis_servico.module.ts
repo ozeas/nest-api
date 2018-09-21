@@ -29,7 +29,7 @@ export class FisServicoModule {
     consumer
       .apply(AuthMiddleware)
       .forRoutes(
-        { path: "/servicos", method: RequestMethod.GET },
+        { path: "/fisservicos", method: RequestMethod.GET },
         /*{ path: "/produtos", method: RequestMethod.POST},
         { path: "/produtos/:id", method: RequestMethod.PUT},
         { path: "/produtos/:id", method: RequestMethod.DELETE }, */
