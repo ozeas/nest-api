@@ -3,6 +3,8 @@ import { databaseConfig } from "../../shared/index";
 
 import { FisServico } from "../fis_servico/fis_servico.entity";
 import { GrupoServico } from "../grupo_servico/grupo_servico.entity";
+import { Indice } from "../indice/indice.entity";
+import { IndiceTaxa } from "../indice_taxa/indice_taxa.entity";
 import { Servico } from "../servico/servico.entity";
 import { UsuarioPerfil } from "../users/user.entity";
 
@@ -24,9 +26,11 @@ export const databaseProvider = {
 
         sequelize.addModels([
             FisServico,
-            UsuarioPerfil,
             GrupoServico,
+            Indice,
+            IndiceTaxa,
             Servico,
+            UsuarioPerfil,
         ]);
 
         // sequelize.addModels([__dirname + "/modules/**/*.entity.ts"]);

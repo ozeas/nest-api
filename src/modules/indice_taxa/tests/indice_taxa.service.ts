@@ -1,5 +1,5 @@
 import { Test } from "@nestjs/testing";
-import { IndiceTaxaService} from "../";
+import { IndiceTaxaService} from "..";
 import { DatabaseModule } from "../../database/database.module";
 import { databaseProvider } from "../../database/database.provider";
 import * as provider from "../indice_taxa.provider";
@@ -16,7 +16,7 @@ describe("IndiceTaxaModule", () => {
         log_pct_usuario_id: 1,
         reajuste_data: "2018-09-12",
         reajuste_positivo: true,
-        srv_indice: 1,
+        srv_indice_id: 1,
       },
       {
         aliquota: 156.78,
@@ -24,7 +24,7 @@ describe("IndiceTaxaModule", () => {
         log_pct_usuario_id: 1,
         reajuste_data: "2018-09-12",
         reajuste_positivo: false,
-        srv_indice: 1,
+        srv_indice_id: 1,
       },
       {
         aliquota: 156.78,
@@ -32,7 +32,7 @@ describe("IndiceTaxaModule", () => {
         log_pct_usuario_id: 1,
         reajuste_data: "2018-09-12",
         reajuste_positivo: true,
-        srv_indice: 1,
+        srv_indice_id: 1,
       },
       {
         aliquota: 156.78,
@@ -40,7 +40,7 @@ describe("IndiceTaxaModule", () => {
         log_pct_usuario_id: 1,
         reajuste_data: "2018-09-12",
         reajuste_positivo: false,
-        srv_indice: 1,
+        srv_indice_id: 1,
       },
       {
         aliquota: 156.78,
@@ -48,7 +48,7 @@ describe("IndiceTaxaModule", () => {
         log_pct_usuario_id: 1,
         reajuste_data: "2018-09-12",
         reajuste_positivo: true,
-        srv_indice: 1,
+        srv_indice_id: 1,
       },
     ];
     const module = await Test.createTestingModule({
