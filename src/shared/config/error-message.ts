@@ -3,6 +3,8 @@ import { IMessages } from "./interfaces/message.interface";
 
 import {
     errorMessagesGrupoServico,
+    errorMessagesIndice,
+    errorMessagesIndiceTaxa,
     errorMessagesServico,
 } from "../../modules/shared/errors";
 
@@ -31,4 +33,6 @@ export const errorMessagesConfig: { [messageCode: string]: IMessages } = {
 
     ...errorMessagesGrupoServico,
     ...errorMessagesServico,
+    ...errorMessagesIndice,
+    ...errorMessagesIndiceTaxa,
 };

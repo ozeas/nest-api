@@ -5,9 +5,7 @@ import {
   Column,
   DataType,
   ForeignKey,
-  IsDecimal,
   Length,
-  Model,
   Table,
 } from "sequelize-typescript";
 import { IDefineOptions } from "sequelize-typescript/lib/interfaces/IDefineOptions";

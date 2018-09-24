@@ -95,8 +95,8 @@ describe("ServiceModule", () => {
       });
 
       it("Deve retornar um serviço", async () => {
-        const expected = await servicoService.get(servicos[0].id);
-        expect(Object.keys(expected).length).toEqual(7);
+        const expected = await servicoService.get(servicos[1].id);
+        expect(expected.id).toEqual(servicos[1].id);
       });
 
       it("Deve criar um serviço", async () => {

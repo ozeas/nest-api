@@ -1,5 +1,7 @@
 /* tslint:disable:variable-name */
+
 import {
+  AfterValidate,
   BeforeValidate,
   BelongsTo,
   Column,
@@ -9,6 +11,7 @@ import {
 } from "sequelize-typescript";
 import { IDefineOptions } from "sequelize-typescript/lib/interfaces/IDefineOptions";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
+import { Indice } from "../indice/indice.entity";
 import { Base } from "../shared/model/base.entity";
 
 const tableOptions: IDefineOptions = {
@@ -18,6 +21,21 @@ const tableOptions: IDefineOptions = {
 
 @Table(tableOptions)
 export class IndiceTaxa extends Base {
+  @BeforeValidate
+  public static validaRequeridos(instance: IndiceTaxa) {
+    const requeridos = [
+      "aliquota",
+      "reajuste_data",
+      "reajuste_positivo",
+    ];
+
+    requeridos.forEach((requerido) => {
+      if (!instance[requerido]) {
+        throw new MessageCodeError(`indice:valida:${requerido}`);
+      }
+    });
+  }
+
   @Column({
     allowNull: false,
     autoIncrement: true,
@@ -27,10 +45,11 @@ export class IndiceTaxa extends Base {
   })
   public id: number;
 
+  @ForeignKey(() => Indice)
   @Column({
     allowNull: false,
   })
-  public src_indice: number;
+  public srv_indice_id: number;
 
   @Column({
     allowNull: false,
@@ -41,7 +60,7 @@ export class IndiceTaxa extends Base {
   @Column({
     allowNull: false,
   })
-  public reajuste_data: Date;
+  public reajuste_data: string;
 
   @Column({
     allowNull: false,
@@ -50,4 +69,7 @@ export class IndiceTaxa extends Base {
 
   @Column
   public log_pct_usuario_id: number;
+
+  @BelongsTo(() => Indice, { onDelete: "cascade"})
+  public indice: Indice;
 }
