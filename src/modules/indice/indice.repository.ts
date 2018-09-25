@@ -49,31 +49,30 @@ export class IndiceRepository implements IIndiceRepository {
   public async update(id: number, data: IIndice, instanceTransaction?: any): Promise<Indice | null> {
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
-        const  indice = await this.indiceRepository.findOne<Indice>({
-          include: [
-            { model: IndiceTaxa },
-          ],
-          where: {id},
-        });
+        const  indice = await this.indiceRepository.findById<Indice>(id);
 
         if (!indice) {
           throw new MessageCodeError("indice:valida:indice");
         }
 
         data = this.addCurrentTime(data, "log_atualizacao");
-        data = this.setUsuario(data);
-        this.validaDataReajuste(data);
+        data = this.setUsuario(data, "alterar");
+        this.validaDataReajuste(data, "alterar");
 
-        indice.taxas.forEach(async (taxa) => {
-          await taxa.destroy();
-        });
+        if (indice.taxas) {
+          indice.taxas.forEach(async (taxa) => {
+            await taxa.destroy();
+          });
+        }
 
-        data.taxas.forEach(async (taxa) => {
-          await IndiceTaxa.create({
-            ...taxa,
-            ...{srv_indice_id: indice.id},
-          }, {transaction});
-        });
+        if (data.taxas) {
+          data.taxas.forEach(async (taxa) => {
+            await IndiceTaxa.create({
+              ...taxa,
+              ...{srv_indice_id: indice.id},
+            }, {transaction});
+          });
+        }
 
         await indice.update(data, {
             returning: true,
@@ -109,7 +108,11 @@ export class IndiceRepository implements IIndiceRepository {
     };
   }
 
-  private setUsuario(indice: any) {
+  private setUsuario(indice: any, action = "criar") {
+    if (action !== "criar" && !indice.taxas) {
+      return indice;
+    }
+
     if (!indice.log_pct_usuario_id) {
       throw new MessageCodeError("indice:valida:log_pct_usuario_id");
     }
@@ -124,7 +127,11 @@ export class IndiceRepository implements IIndiceRepository {
     return indice;
   }
 
-  private validaDataReajuste(indice: any) {
+  private validaDataReajuste(indice: any, action = "criar") {
+    if (action !== "criar" && !indice.taxas) {
+      return true;
+    }
+
     if (!indice.taxas || typeof indice.taxas !== "object" || !indice.taxas.length) {
       throw new MessageCodeError("indice:valida:taxas");
     }
