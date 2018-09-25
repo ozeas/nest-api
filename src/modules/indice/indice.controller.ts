@@ -16,7 +16,7 @@ import {
 import { ApiForbiddenResponse, ApiResponse } from "@nestjs/swagger";
 import { Roles } from "../auth/roles.decorator";
 import {
-  // RotinasCodigos,
+  RotinasCodigos,
   successMessage } from "./config";
 import { IndiceService } from "./indice.service";
 
@@ -39,7 +39,7 @@ export class IndiceController {
    * @returns Array de indices
    */
   @ApiResponse({ status: 200, description: "[Indice]"})
-  // @Roles(RotinasCodigos.LISTAR)
+  @Roles(RotinasCodigos.LISTAR)
   @Get("indices")
   public async all(@Res() res, @Query() options) {
     const indice = await this.indiceService.getAll(options);
@@ -48,12 +48,10 @@ export class IndiceController {
 
   @ApiResponse({status: 201, description: "Indíce criado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao criar o indíce"})
-  // @Roles(RotinasCodigos.INCLUIR)
+  @Roles(RotinasCodigos.INCLUIR)
   @Post("indices")
   public async create(@Res() res, @Req() req, @Body() indice) {
     try {
-      /* tslint:disable */
-      console.log(indice);
       await this.indiceService.create(indice);
     } catch (error) {
       return res.status(HttpStatus.BAD_GATEWAY).json(error);
@@ -70,7 +68,7 @@ export class IndiceController {
    * @returns JSON
    */
   @ApiResponse({ status: 200, description: "Indíce" })
-  // @Roles(RotinasCodigos.LISTAR)
+  @Roles(RotinasCodigos.LISTAR)
   @Get("indices/:id")
   public async show(@Res() res, @Param("id") id: number) {
     const servico = await this.indiceService.get(id);
@@ -88,7 +86,7 @@ export class IndiceController {
    */
   @ApiResponse({ status: 200, description: "Atualizado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao editar os dados"})
-  // @Roles(RotinasCodigos.EDITAR)
+  @Roles(RotinasCodigos.EDITAR)
   @Put("indices/:id")
   public async update(@Res() res, @Req() req, @Body() servico, @Param("id") id: number) {
     try {
@@ -108,7 +106,7 @@ export class IndiceController {
    */
   @ApiResponse({ status: 202, description: "Excluído com sucesso"})
   @ApiForbiddenResponse({ description: "Houve um erro ao excluir os dados" })
-  // @Roles(RotinasCodigos.EXCLUIR)
+  @Roles(RotinasCodigos.EXCLUIR)
   @Delete("indices/:id")
   public async delete(@Res() res, @Param("id") id: number) {
     try {
