@@ -59,7 +59,7 @@ export class IndiceRepository implements IIndiceRepository {
         data = this.setUsuario(data, "alterar");
         this.validaDataReajuste(data, "alterar");
 
-        if (indice.taxas) {
+        if (data.taxas && data.taxas.length) {
           indice.taxas.forEach(async (taxa) => {
             await taxa.destroy();
           });

@@ -75,15 +75,15 @@ describe("ServiceModule", () => {
 
       servicoService = module.get<ServicoService>(ServicoService);
 
-      servicos.forEach(async (servico) => {
+      for (const servico of servicos) {
         await servicoService.create(servico);
-      });
+      }
     });
 
     afterAll(async () => {
-      servicos.forEach( async (servico) => {
+      for (const servico of servicos) {
         await servicoService.delete(servico.id);
-      });
+      }
       await servicoService.delete(9001);
     });
 
@@ -95,8 +95,8 @@ describe("ServiceModule", () => {
       });
 
       it("Deve retornar um serviço", async () => {
-        const expected = await servicoService.get(servicos[1].id);
-        expect(expected.id).toEqual(servicos[1].id);
+        const expected = await servicoService.get(6001);
+        expect(expected.id).toEqual(6001);
       });
 
       it("Deve criar um serviço", async () => {

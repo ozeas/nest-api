@@ -5,12 +5,14 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Length,
   Table,
 } from "sequelize-typescript";
 import { IDefineOptions } from "sequelize-typescript/lib/interfaces/IDefineOptions";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
 import { GrupoServico } from "../grupo_servico/grupo_servico.entity";
+import { PlanoItem } from "../plano_item";
 import { Base } from "../shared/model/base.entity";
 
 const tableOptions: IDefineOptions = {
@@ -96,4 +98,7 @@ export class Servico extends Base {
 
   @BelongsTo(() => GrupoServico)
   public grupo_servico: GrupoServico;
+
+  @HasMany(() => PlanoItem)
+  public planoItens: PlanoItem[];
 }

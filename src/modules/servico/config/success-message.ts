@@ -13,14 +13,14 @@ export const successMessageServico: { [messageCode: string]: IMessages } = {
     codigo: HttpStatus.OK,
     motivo: "Grupo de serviço excluído com sucesso",
     solucao: "",
-    tipo: "Created",
+    tipo: "Deleted",
     titulo: "Grupo de serviço excluído com sucesso",
   },
   "servico:update:ok": {
     codigo: HttpStatus.OK,
     motivo: "Grupo de serviço atualizado com sucesso",
     solucao: "",
-    tipo: "Created",
+    tipo: "Updated",
     titulo: "Grupo de serviço atualizado com sucesso",
   },
 };

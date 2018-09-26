@@ -8,6 +8,8 @@ export interface IDatabaseConfigAttributes {
     logging: boolean | (() => void);
     force: boolean;
     timezone: string;
+    dialectOptions: object;
+    operatorsAliases: boolean;
 }
 
 export interface IDatabaseConfig {

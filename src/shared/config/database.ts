@@ -5,6 +5,9 @@ export const databaseConfig: IDatabaseConfig = {
     development: {
         database: process.env.DB_NAME || "dataplus",
         dialect: process.env.DB_DIALECT || "mssql",
+        dialectOptions: {
+            encrypt: true
+        },
         force: true,
         host: process.env.DB_HOST || "192.168.0.244",
         logging: false,
@@ -12,6 +15,7 @@ export const databaseConfig: IDatabaseConfig = {
         port: Number(process.env.DB_PORT) || 1433,
         timezone: "-03:00",
         username: process.env.DB_USER || "sa",
+        operatorsAliases: false,
     },
     production: {
         database: process.env.DB_NAME || "dataplus",
@@ -23,6 +27,10 @@ export const databaseConfig: IDatabaseConfig = {
         port: Number(process.env.DB_PORT) || 1433,
         timezone: "-03:00",
         username: process.env.DB_USER || "sa",
+        dialectOptions: {
+            encrypt: true
+        },
+        operatorsAliases: false,
     },
     test: {
         database: process.env.DB_NAME || "dataplus",
@@ -34,5 +42,9 @@ export const databaseConfig: IDatabaseConfig = {
         port: Number(process.env.DB_PORT) || 1433,
         timezone: "-03:00",
         username: process.env.DB_USER || "sa",
+        dialectOptions: {
+            encrypt: true
+        },
+        operatorsAliases: false,
     },
 };

@@ -15,7 +15,7 @@ describe("IndiceModule", () => {
         {
           desativado: false,
           descricao: "INDICE 1008",
-          id: -1008,
+          id: 100008,
           int_empresa_id: 1,
           log_pct_usuario_id: 1,
           taxas: [
@@ -36,7 +36,7 @@ describe("IndiceModule", () => {
         {
           desativado: false,
           descricao: "INDICE 1009",
-          id: -1009,
+          id: 100009,
           int_empresa_id: 1,
           log_pct_usuario_id: 1,
           taxas: [
@@ -57,7 +57,7 @@ describe("IndiceModule", () => {
         {
           desativado: false,
           descricao: "INDICE 1010",
-          id: -10010,
+          id: 1000010,
           int_empresa_id: 1,
           log_pct_usuario_id: 1,
           taxas: [
@@ -89,22 +89,23 @@ describe("IndiceModule", () => {
 
       indiceService = module.get<IndiceService>(IndiceService);
 
-      indices.forEach(async (indice) => {
+      for (const indice of indices) {
         await indiceService.create(indice);
-      });
+      }
+
     });
 
     afterAll(async () => {
-      indices.push({id: -1});
-      indices.push({id: -2});
-      indices.push({id: -3});
-      indices.push({id: -4});
-      indices.push({id: -5});
-      indices.push({id: -10050});
+      indices.push({id: 1000000});
+      indices.push({id: 2000000});
+      indices.push({id: 3000000});
+      indices.push({id: 4000000});
+      indices.push({id: 5000000});
+      indices.push({id: 1000050});
 
-      indices.forEach( async (indice) => {
+      for (const indice of indices) {
         await indiceService.delete(indice.id);
-      });
+      }
     });
 
     it("Deve retornar um array de indices", async () => {
@@ -121,7 +122,7 @@ describe("IndiceModule", () => {
       const indice = {
         desativado: false,
         descricao: "INDICE 1008",
-        id: -10050,
+        id: 1000050,
         int_empresa_id: 1,
         log_pct_usuario_id: 1,
         taxas: [
@@ -157,7 +158,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar indíce sem descricao", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
+      const indice = {
+        desativado: false,
+        descricao: "INDICE 1008",
+        id: 100008,
+        int_empresa_id: 1,
+        log_pct_usuario_id: 1,
+        taxas: [
+            {
+                aliquota: 1000,
+                log_pct_usuario_id: 1,
+                reajuste_data: "2018-09-30",
+                reajuste_positivo: true,
+            },
+            {
+                aliquota: 1000,
+                reajuste_data: "2018-09-20",
+                reajuste_positivo: true,
+                log_pct_usuario_id: 1,
+            },
+        ],
+      };
       delete indice.descricao;
       try {
         await indiceService.create(indice);
@@ -169,7 +190,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar indíce sem filial", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
+      const indice = {
+        desativado: false,
+        descricao: "INDICE 1008",
+        id: 1005008,
+        int_empresa_id: 1,
+        log_pct_usuario_id: 1,
+        taxas: [
+            {
+                aliquota: 1000,
+                log_pct_usuario_id: 1,
+                reajuste_data: "2018-09-30",
+                reajuste_positivo: true,
+            },
+            {
+                aliquota: 1000,
+                reajuste_data: "2018-09-20",
+                reajuste_positivo: true,
+                log_pct_usuario_id: 1,
+            },
+        ],
+      };
       delete indice.int_empresa_id;
       try {
         await indiceService.create(indice);
@@ -181,7 +222,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar indíce sem taxas", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
+      const indice = {
+          desativado: false,
+          descricao: "INDICE 1008",
+          id: 1005008,
+          int_empresa_id: 1,
+          log_pct_usuario_id: 1,
+          taxas: [
+              {
+                  aliquota: 1000,
+                  log_pct_usuario_id: 1,
+                  reajuste_data: "2018-09-30",
+                  reajuste_positivo: true,
+              },
+              {
+                  aliquota: 1000,
+                  reajuste_data: "2018-09-20",
+                  reajuste_positivo: true,
+                  log_pct_usuario_id: 1,
+              },
+          ],
+        };
       delete indice.taxas;
       try {
         await indiceService.create(indice);
@@ -193,7 +254,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar taxa vazia", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
+      const indice = {
+          desativado: false,
+          descricao: "INDICE 1008",
+          id: 1005008,
+          int_empresa_id: 1,
+          log_pct_usuario_id: 1,
+          taxas: [
+              {
+                  aliquota: 1000,
+                  log_pct_usuario_id: 1,
+                  reajuste_data: "2018-09-30",
+                  reajuste_positivo: true,
+              },
+              {
+                  aliquota: 1000,
+                  reajuste_data: "2018-09-20",
+                  reajuste_positivo: true,
+                  log_pct_usuario_id: 1,
+              },
+          ],
+        };
       indice.taxas = [];
       try {
         await indiceService.create(indice);
@@ -205,8 +286,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar taxa sem aliquota", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
-      indice.id = -1;
+      const indice = {
+          desativado: false,
+          descricao: "INDICE 1008",
+          id: 1005008,
+          int_empresa_id: 1,
+          log_pct_usuario_id: 1,
+          taxas: [
+              {
+                  aliquota: 1000,
+                  log_pct_usuario_id: 1,
+                  reajuste_data: "2018-09-30",
+                  reajuste_positivo: true,
+              },
+              {
+                  aliquota: 1000,
+                  reajuste_data: "2018-09-20",
+                  reajuste_positivo: true,
+                  log_pct_usuario_id: 1,
+              },
+          ],
+        };
       delete indice.taxas[0].aliquota;
       try {
         await indiceService.create(indice);
@@ -218,8 +318,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar taxa sem data reajuste", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
-      indice.id = -2;
+      const indice = {
+          desativado: false,
+          descricao: "INDICE 1008",
+          id: 1005008,
+          int_empresa_id: 1,
+          log_pct_usuario_id: 1,
+          taxas: [
+              {
+                  aliquota: 1000,
+                  log_pct_usuario_id: 1,
+                  reajuste_data: "2018-09-30",
+                  reajuste_positivo: true,
+              },
+              {
+                  aliquota: 1000,
+                  reajuste_data: "2018-09-20",
+                  reajuste_positivo: true,
+                  log_pct_usuario_id: 1,
+              },
+          ],
+        };
       delete indice.taxas[0].reajuste_data;
       try {
         await indiceService.create(indice);
@@ -231,8 +350,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar taxa sem reajuste positivo", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
-      indice.id = -3;
+      const indice = {
+          desativado: false,
+          descricao: "INDICE 1008",
+          id: 1005008,
+          int_empresa_id: 1,
+          log_pct_usuario_id: 1,
+          taxas: [
+              {
+                  aliquota: 1000,
+                  log_pct_usuario_id: 1,
+                  reajuste_data: "2018-09-30",
+                  reajuste_positivo: true,
+              },
+              {
+                  aliquota: 1000,
+                  reajuste_data: "2018-09-20",
+                  reajuste_positivo: true,
+                  log_pct_usuario_id: 1,
+              },
+          ],
+        };
       delete indice.taxas[0].reajuste_positivo;
       try {
         await indiceService.create(indice);
@@ -244,8 +382,27 @@ describe("IndiceModule", () => {
 
     it("Deve retornar erro ao criar taxa com datas reajuste iguais", async () => {
       let expected = false;
-      const indice = Object.assign({}, indices[0]);
-      indice.id = -4;
+      const indice = {
+          desativado: false,
+          descricao: "INDICE 1008",
+          id: 1005008,
+          int_empresa_id: 1,
+          log_pct_usuario_id: 1,
+          taxas: [
+              {
+                  aliquota: 1000,
+                  log_pct_usuario_id: 1,
+                  reajuste_data: "2018-09-30",
+                  reajuste_positivo: true,
+              },
+              {
+                  aliquota: 1000,
+                  reajuste_data: "2018-09-20",
+                  reajuste_positivo: true,
+                  log_pct_usuario_id: 1,
+              },
+          ],
+        };
       indice.taxas[0].reajuste_data = "2018-09-25";
       indice.taxas[1].reajuste_data = "2018-09-25";
 

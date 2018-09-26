@@ -19,13 +19,12 @@ export class PlanoRepository implements IPlanoRepository {
   }
 
   public async findById(id: number): Promise<Plano | null> {
-    return await this.model.findById<Plano>(id);
+    return await this.model.findById<Plano>(id, {include: [PlanoItem]});
   }
 
   public async create(data: IPlano, instanceTransaction?: any): Promise<Plano> {
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
-        this.validaItens(data);
         return await this.model.create<Plano>(data, {
             include: [PlanoItem],
             returning: true,
@@ -40,15 +39,28 @@ export class PlanoRepository implements IPlanoRepository {
   public async update(id: number, data: IPlano, instanceTransaction?: any): Promise<Plano | null> {
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
-        const plano = await this.model.findById<Plano>(id);
+        const plano = await this.model.findById<Plano>(id, {include: [PlanoItem]});
 
         if (!plano) {
           throw new MessageCodeError("plano:valida:plano");
         }
+
+        if (data.itens) {
+          plano.itens.forEach(async (item) => {
+            await item.destroy();
+          });
+
+          data.itens.forEach(async (item) => {
+            await PlanoItem.create({
+              ...item,
+              ...{srv_plano_id: plano.id},
+            }, {transaction});
+          });
+        }
+
         data = this.addCurrentTime(data, "log_atualizacao");
         return await plano.update(data, {
             transaction: !instanceTransaction ? transaction : instanceTransaction,
-            validate: false,
             where: {id},
           },
         );
@@ -76,12 +88,5 @@ export class PlanoRepository implements IPlanoRepository {
     return {
       ...data,
     };
-  }
-
-  private validaItens(data) {
-    if (!data.itens) {
-      throw new MessageCodeError("plano:valida:quantidadeitens");
-    }
-    return true;
   }
 }

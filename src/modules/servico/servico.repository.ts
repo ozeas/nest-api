@@ -44,7 +44,7 @@ export class ServicoRepository implements IServicoRepository {
           throw new MessageCodeError("servico:valida:servico");
         }
         data = this.addCurrentTime(data, "log_atualizacao");
-        return await this.servicoRepository.update(data, {
+        return await servico.update(data, {
             transaction: !instanceTransaction ? transaction : instanceTransaction,
             validate: false,
             where: {id},
