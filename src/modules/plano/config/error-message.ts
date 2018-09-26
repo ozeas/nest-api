@@ -89,4 +89,28 @@ export const errorMessagesPlano: { [messageCode: string]: IMessages } = {
       tipo: "BadRequest",
       titulo: "O plano deve conter pelo menos um item de serviço",
     },
+
+    "plano:erro:valorservico": {
+      codigo: HttpStatus.BAD_REQUEST,
+      motivo: "O valor do serviço é diferente da soma dos valores bruto dos itens",
+      solucao: "Verifique os valores dos serviços aplicados nos itens",
+      tipo: "BadRequest",
+      titulo: "O valor do serviço deve ser igual a soma dos valores brutos dos itens",
+    },
+
+    "plano:erro:valordesconto": {
+      codigo: HttpStatus.BAD_REQUEST,
+      motivo: "O valor de desconto é diferente da soma dos descontos nos itens",
+      solucao: "Verifique os valores de descontos aplicados nos itens",
+      tipo: "BadRequest",
+      titulo: "O valor de desconto deve ser igual a soma dos descontos nos itens",
+    },
+
+    "plano:erro:valortotal": {
+      codigo: HttpStatus.BAD_REQUEST,
+      motivo: "O valor total é diferente da soma dos totais nos itens",
+      solucao: "Verifique os valores totais dos itens adicionados",
+      tipo: "BadRequest",
+      titulo: "O valor total deve ser igual a soma dos totais nos itens",
+    },
 };

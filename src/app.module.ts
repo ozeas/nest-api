@@ -6,6 +6,7 @@ import { DicionarioModule } from "./modules/dicionario/dicionario.module";
 import { FisServicoModule } from "./modules/fis_servico/fis_servico.module";
 import { GrupoServicoModule } from "./modules/grupo_servico/grupo_servico.module";
 import { IndiceModule } from "./modules/indice/indice.module";
+import { PlanoModule } from "./modules/plano/plano.module";
 import { ServicoModule } from "./modules/servico/servico.module";
 import { UserModule } from "./modules/users/user.module";
 
@@ -17,6 +18,7 @@ import { UserModule } from "./modules/users/user.module";
         FisServicoModule,
         GrupoServicoModule,
         IndiceModule,
+        PlanoModule,
         ServicoModule,
         UserModule,
     ],

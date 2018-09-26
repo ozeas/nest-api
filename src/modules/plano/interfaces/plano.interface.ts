@@ -7,4 +7,5 @@ export interface IPlano {
   valor_desconto?: number;
   valor_total?: number;
   desativado?: boolean;
+  itens?: any;
 }

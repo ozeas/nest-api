@@ -33,10 +33,58 @@ export class Plano extends Base {
     ];
 
     requeridos.forEach((requerido) => {
-      if (!instance[requerido]) {
+      if (instance[requerido] === undefined) {
         throw new MessageCodeError(`plano:valida:${requerido}`);
       }
     });
+  }
+
+  @BeforeValidate
+  public static validaValorServico(instance: Plano) {
+    if (!instance.itens || !instance.itens.length) {
+      throw new MessageCodeError("plano:valida:quantidadeitens");
+    }
+
+    let total = 0;
+    instance.itens.forEach((item) => {
+      total += item.valor_bruto;
+    });
+
+    if (total !== instance.valor_servico) {
+      throw new MessageCodeError("plano:erro:valorservico");
+    }
+  }
+
+  @BeforeValidate
+  public static validaValorDesconto(instance: Plano) {
+    if (!instance.itens || !instance.itens.length) {
+      throw new MessageCodeError("plano:valida:quantidadeitens");
+    }
+
+    let total = 0;
+    instance.itens.forEach((item) => {
+      total += item.valor_desconto;
+    });
+
+    if (total !== instance.valor_desconto) {
+      throw new MessageCodeError("plano:erro:valordesconto");
+    }
+  }
+
+  @BeforeValidate
+  public static validaValorTotal(instance: Plano) {
+    if (!instance.itens || !instance.itens.length) {
+      throw new MessageCodeError("plano:valida:quantidadeitens");
+    }
+
+    let total = 0;
+    instance.itens.forEach((item) => {
+      total += item.valor_total;
+    });
+
+    if (total !== instance.valor_total) {
+      throw new MessageCodeError("plano:erro:valortotal");
+    }
   }
 
   @Column({

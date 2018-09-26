@@ -5,6 +5,8 @@ import { FisServico } from "../fis_servico/fis_servico.entity";
 import { GrupoServico } from "../grupo_servico/grupo_servico.entity";
 import { Indice } from "../indice/indice.entity";
 import { IndiceTaxa } from "../indice_taxa/indice_taxa.entity";
+import { Plano } from "../plano/plano.entity";
+import { PlanoItem } from "../plano_item/plano_item.entity";
 import { Servico } from "../servico/servico.entity";
 import { UsuarioPerfil } from "../users/user.entity";
 
@@ -29,6 +31,8 @@ export const databaseProvider = {
             GrupoServico,
             Indice,
             IndiceTaxa,
+            Plano,
+            PlanoItem,
             Servico,
             UsuarioPerfil,
         ]);
