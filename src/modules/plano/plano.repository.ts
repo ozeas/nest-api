@@ -35,12 +35,13 @@ export class PlanoRepository extends BaseRepository<Plano> implements IPlanoRepo
         const plano = await this.planoRepository.findById<Plano>(id, {include: [PlanoItem]});
 
         if (!plano) {
-          throw new MessageCodeError("plano:valida:plano");
+          throw new MessageCodeError("plano:notfound");
         }
+
         instanceTransaction = instanceTransaction ? transaction : instanceTransaction;
         if (data.itens) {
           plano.itens.forEach(async (item) => {
-            await item.destroy();
+            await item.destroy({transaction: instanceTransaction});
           });
 
           data.itens.forEach(async (item) => {

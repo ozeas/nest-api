@@ -27,12 +27,9 @@ export class IndiceRepository extends BaseRepository<Indice> implements IIndiceR
 
   public async create(indice: IIndice, instanceTransaction?: any): Promise<Indice> {
     try {
-      return await this.sequelizeInstance.transaction(async (transaction) => {
         indice = this.setUsuario(indice);
         this.validaDataReajuste(indice);
-
-        await super.create(indice, transaction, [IndiceTaxa]);
-      });
+        return await super.create(indice, instanceTransaction, [IndiceTaxa]);
     } catch (error) {
       throw error;
     }
@@ -46,6 +43,7 @@ export class IndiceRepository extends BaseRepository<Indice> implements IIndiceR
         if (!indice) {
           throw new MessageCodeError("indice:valida:indice");
         }
+        instanceTransaction = !instanceTransaction ? transaction : instanceTransaction;
 
         data = this.addCurrentTime(data, "log_atualizacao");
         data = this.setUsuario(data, "alterar");
@@ -53,7 +51,7 @@ export class IndiceRepository extends BaseRepository<Indice> implements IIndiceR
 
         if (data.taxas && data.taxas.length) {
           indice.taxas.forEach(async (taxa) => {
-            await taxa.destroy();
+            await taxa.destroy({transaction: instanceTransaction});
           });
         }
 
@@ -62,13 +60,13 @@ export class IndiceRepository extends BaseRepository<Indice> implements IIndiceR
             await IndiceTaxa.create({
               ...taxa,
               ...{srv_indice_id: indice.id},
-            }, {transaction});
+            }, {transaction: instanceTransaction});
           });
         }
 
         await indice.update(data, {
             returning: true,
-            transaction: !instanceTransaction ? transaction : instanceTransaction,
+            transaction: instanceTransaction,
             validate: false,
             where: {id},
           },
