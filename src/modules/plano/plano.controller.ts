@@ -31,7 +31,7 @@ export class PlanoController {
    * @returns [Plano]
    */
   @ApiResponse({ status: 200, description: "[Plano]"})
-  // @Roles(RotinasCodigos.LISTAR)
+  @Roles(RotinasCodigos.LISTAR)
   @Get("planos")
   public async all(@Res() res, @Query() options) {
     const plano = await this.service.getAll(options);
@@ -48,7 +48,7 @@ export class PlanoController {
    */
   @ApiResponse({status: 201, description: "Plano criado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao criar o plano"})
-  // @Roles(RotinasCodigos.INCLUIR)
+  @Roles(RotinasCodigos.INCLUIR)
   @Post("planos")
   public async create(@Res() res, @Req() req, @Body() plano) {
     try {
@@ -68,7 +68,7 @@ export class PlanoController {
    * @returns JSON
    */
   @ApiResponse({ status: 200, description: "Plano" })
-  // @Roles(RotinasCodigos.LISTAR)
+  @Roles(RotinasCodigos.LISTAR)
   @Get("planos/:id")
   public async show(@Res() res, @Param("id") id: number) {
     const plano = await this.service.get(id);
@@ -86,7 +86,7 @@ export class PlanoController {
    */
   @ApiResponse({ status: 200, description: "Atualizado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao editar os dados"})
-  // @Roles(RotinasCodigos.EDITAR)
+  @Roles(RotinasCodigos.EDITAR)
   @Put("planos/:id")
   public async update(@Res() res, @Req() req, @Body() plano, @Param("id") id: number) {
     try {
@@ -106,7 +106,7 @@ export class PlanoController {
    */
   @ApiResponse({ status: 202, description: "Excluído com sucesso"})
   @ApiForbiddenResponse({ description: "Houve um erro ao excluir os dados" })
-  // @Roles(RotinasCodigos.EXCLUIR)
+  @Roles(RotinasCodigos.EXCLUIR)
   @Delete("planos/:id")
   public async delete(@Res() res, @Param("id") id: number) {
     try {

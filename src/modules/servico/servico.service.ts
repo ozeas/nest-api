@@ -1,39 +1,10 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { BaseService } from "../shared/model/base.service";
 import { IServicoService } from "./interfaces";
 
 @Injectable()
-export class ServicoService implements IServicoService {
-  constructor(@Inject("ServicoRepository") private readonly repository) {}
-
-  public async getAll(options?: any) {
-    return await this.repository.findAll(options);
-  }
-
-  public async get(id: number) {
-    return await this.repository.findById(id);
-  }
-
-  public async create(servico: object, instanceTransaction?: any) {
-    try {
-      return await this.repository.create(servico, instanceTransaction);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  public async update(id: number, servico: object, instanceTransaction?: any) {
-    try {
-      return await this.repository.update(id, servico, instanceTransaction);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  public async delete(id: number, instanceTransaction?: any) {
-    try {
-      return await this.repository.delete(id, instanceTransaction);
-    } catch (error) {
-      throw error;
-    }
+export class ServicoService extends BaseService implements IServicoService {
+  constructor(@Inject("ServicoRepository") protected readonly repository) {
+    super(repository);
   }
 }

@@ -27,14 +27,14 @@ describe("PlanoModule", () => {
           log_pct_usuario_id: 1,
           itens: [
             {
-              srv_servico_id: 9002,
+              srv_servico_id: 9000003,
               quantidade: 1,
               valor_bruto: 150,
               valor_desconto: 50,
               valor_total: 100,
             },
             {
-              srv_servico_id: 9002,
+              srv_servico_id: 9000003,
               quantidade: 1,
               valor_bruto: 150,
               valor_desconto: 50,
@@ -53,14 +53,14 @@ describe("PlanoModule", () => {
           log_pct_usuario_id: 1,
           itens: [
             {
-              srv_servico_id: 9002,
+              srv_servico_id: 9000003,
               quantidade: 1,
               valor_bruto: 150,
               valor_desconto: 50,
               valor_total: 100,
             },
             {
-              srv_servico_id: 9002,
+              srv_servico_id: 9000003,
               quantidade: 1,
               valor_bruto: 150,
               valor_desconto: 50,
@@ -115,14 +115,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -158,14 +158,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -195,14 +195,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -232,14 +232,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -269,14 +269,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -306,14 +306,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -384,14 +384,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -420,14 +420,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -456,14 +456,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -498,7 +498,7 @@ describe("PlanoModule", () => {
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -527,13 +527,13 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -562,14 +562,14 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1.5,
             valor_bruto: 150,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -598,13 +598,13 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -633,13 +633,13 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_desconto: 50,
             valor_total: 100,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -668,13 +668,13 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_total: 150,
           },
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 0,
@@ -703,7 +703,7 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 0,
@@ -732,7 +732,7 @@ describe("PlanoModule", () => {
         log_pct_usuario_id: 1,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 0,
@@ -766,7 +766,7 @@ describe("PlanoModule", () => {
         valor_total: 100,
         itens: [
           {
-            srv_servico_id: 9002,
+            srv_servico_id: 9000003,
             quantidade: 1,
             valor_bruto: 150,
             valor_desconto: 50,
@@ -791,8 +791,8 @@ describe("PlanoModule", () => {
     });
 
     it("Deve excluir um plano", async () => {
-      await planoService.delete(planos[0].id);
-      const expected = await planoService.get(planos[0].id);
+      await planoService.delete(1000010);
+      const expected = await planoService.get(1000010);
       expect(expected).toBe(null);
     });
   });

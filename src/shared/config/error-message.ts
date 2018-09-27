@@ -11,10 +11,17 @@ import {
 } from "../../modules/shared/errors";
 
 export const errorMessagesConfig: { [messageCode: string]: IMessages } = {
+    "generic:error:delete": {
+        codigo: HttpStatus.NOT_FOUND,
+        motivo: "Não foi possível excluir o recurso no banco de dados",
+        solucao: "Verifique as dependências do objeto ou contate o suporte",
+        tipo: "notDeleted",
+        titulo: "Recurso não excluído",
+    },
     "generic:notFound": {
         codigo: HttpStatus.NOT_FOUND,
         motivo: "Objeto não encontrado no banco de dados",
-        solucao: "Informe um dados válido",
+        solucao: "Informe um identificador válido para o objeto",
         tipo: "notFound",
         titulo: "Objeto não encontrado",
     },

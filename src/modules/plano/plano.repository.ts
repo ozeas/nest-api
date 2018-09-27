@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
 import { PlanoItem } from "../plano_item";
+import { BaseRepository } from "../shared/model/base.repository";
 import { IPlano, IPlanoRepository } from "./interfaces";
 import { Plano } from "./plano.entity";
 
@@ -8,29 +9,21 @@ import { Plano } from "./plano.entity";
 const moment = require("moment");
 
 @Injectable()
-export class PlanoRepository implements IPlanoRepository {
+export class PlanoRepository extends BaseRepository<Plano> implements IPlanoRepository {
   constructor(
-    @Inject("PlanoModel") private readonly model: typeof Plano,
-    @Inject("SequelizeInstance") private readonly sequelizeInstance,
-  ) {}
-
-  public async findAll(options: any): Promise<Plano[]> {
-    return await this.model.findAll<Plano>(options);
+    @Inject("SequelizeInstance") public readonly sequelizeInstance,
+    @Inject("PlanoModel") private readonly planoRepository: typeof Plano,
+  ) {
+    super(sequelizeInstance, Plano);
   }
 
   public async findById(id: number): Promise<Plano | null> {
-    return await this.model.findById<Plano>(id, {include: [PlanoItem]});
+    return await super.findById(id, {include: [PlanoItem]});
   }
 
   public async create(data: IPlano, instanceTransaction?: any): Promise<Plano> {
     try {
-      return await this.sequelizeInstance.transaction(async (transaction) => {
-        return await this.model.create<Plano>(data, {
-            include: [PlanoItem],
-            returning: true,
-            transaction: !instanceTransaction ? transaction : instanceTransaction,
-        });
-      });
+      return await super.create(data, instanceTransaction, [PlanoItem]);
     } catch (error) {
       throw error;
     }
@@ -39,12 +32,12 @@ export class PlanoRepository implements IPlanoRepository {
   public async update(id: number, data: IPlano, instanceTransaction?: any): Promise<Plano | null> {
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
-        const plano = await this.model.findById<Plano>(id, {include: [PlanoItem]});
+        const plano = await this.planoRepository.findById<Plano>(id, {include: [PlanoItem]});
 
         if (!plano) {
           throw new MessageCodeError("plano:valida:plano");
         }
-
+        instanceTransaction = instanceTransaction ? transaction : instanceTransaction;
         if (data.itens) {
           plano.itens.forEach(async (item) => {
             await item.destroy();
@@ -54,32 +47,19 @@ export class PlanoRepository implements IPlanoRepository {
             await PlanoItem.create({
               ...item,
               ...{srv_plano_id: plano.id},
-            }, {transaction});
+            }, {transaction: instanceTransaction});
           });
         }
 
         data = this.addCurrentTime(data, "log_atualizacao");
         return await plano.update(data, {
-            transaction: !instanceTransaction ? transaction : instanceTransaction,
+            transaction: instanceTransaction,
             where: {id},
           },
         );
       });
     } catch (error) {
       throw error;
-    }
-  }
-
-  public async delete(id: number, instanceTransaction?: any): Promise<void> {
-    try {
-      return await this.sequelizeInstance.transaction(async (transaction) => {
-        return await this.model.destroy({
-          transaction: !instanceTransaction ? transaction : instanceTransaction,
-          where: { id },
-        });
-      });
-    } catch (error) {
-      throw new MessageCodeError("plano:delete:erro");
     }
   }
 
