@@ -81,10 +81,10 @@ describe("ServiceModule", () => {
     });
 
     afterAll(async () => {
+      servicos.push({id: 9001});
       for (const servico of servicos) {
         await servicoService.delete(servico.id);
       }
-      await servicoService.delete(9001);
     });
 
     describe("ServicoService", () => {
@@ -267,9 +267,8 @@ describe("ServiceModule", () => {
     });
 
     it("Deve excluir um serviço", async () => {
-      const id = servicos[2].id;
-      await servicoService.delete(id);
-      const expected = await servicoService.get(id);
+      await servicoService.delete(9001);
+      const expected = await servicoService.get(9001);
       expect(expected).toBe(null);
     });
   });

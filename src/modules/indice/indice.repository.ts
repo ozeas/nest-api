@@ -1,33 +1,28 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { MessageCodeError } from "../../shared/errors/message-code-error";
 import { IndiceTaxa } from "../indice_taxa/indice_taxa.entity";
+import { BaseRepository } from "../shared/model/base.repository";
 import { Indice } from "./indice.entity";
 import { IIndice, IIndiceRepository } from "./interfaces";
 
 /* tslint:disable:no-var-requires */
-
 const moment = require("moment");
 
 @Injectable()
-export class IndiceRepository implements IIndiceRepository {
+export class IndiceRepository extends BaseRepository<Indice> implements IIndiceRepository {
   constructor(
+    @Inject("SequelizeInstance") public readonly sequelizeInstance,
     @Inject("IndiceModel") private readonly indiceRepository: typeof Indice,
-    @Inject("SequelizeInstance") private readonly sequelizeInstance,
-  ) {}
+  ) {
+    super(sequelizeInstance, Indice);
+  }
 
-  public async findAll(options: any): Promise<Indice[]> {
-    options = {
-      ...options,
-      include: [IndiceTaxa],
-    };
-    return await this.indiceRepository.findAll<Indice>(options);
+  public async findAll(options?: any): Promise<Indice[]> {
+    return await super.findAll(options, [IndiceTaxa]);
   }
 
   public async findById(id: number): Promise<Indice | null> {
-    const options = {
-      include: [IndiceTaxa],
-    };
-    return await this.indiceRepository.findById<Indice>(id, options);
+    return await super.findById(id, {include: [IndiceTaxa]});
   }
 
   public async create(indice: IIndice, instanceTransaction?: any): Promise<Indice> {
@@ -35,11 +30,8 @@ export class IndiceRepository implements IIndiceRepository {
       return await this.sequelizeInstance.transaction(async (transaction) => {
         indice = this.setUsuario(indice);
         this.validaDataReajuste(indice);
-        await this.indiceRepository.create<Indice>(indice, {
-            include: [IndiceTaxa],
-            returning: true,
-            transaction: !instanceTransaction ? transaction : instanceTransaction,
-        });
+
+        await super.create(indice, transaction, [IndiceTaxa]);
       });
     } catch (error) {
       throw error;
@@ -85,19 +77,6 @@ export class IndiceRepository implements IIndiceRepository {
       });
     } catch (error) {
       throw error;
-    }
-  }
-
-  public async delete(id: number, instanceTransaction?: any): Promise<void> {
-    try {
-      return await this.sequelizeInstance.transaction(async (transaction) => {
-        return await this.indiceRepository.destroy({
-          transaction: !instanceTransaction ? transaction : instanceTransaction,
-          where: { id },
-        });
-      });
-    } catch (error) {
-      throw new MessageCodeError("indice:delete:erro");
     }
   }
 

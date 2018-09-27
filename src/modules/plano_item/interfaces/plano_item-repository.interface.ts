@@ -6,5 +6,5 @@ export interface IPlanoItemRepository {
   delete(id: number, instanceTransaction?: any): Promise<void>;
   findAll(options: object): Promise<PlanoItem[]>;
   findById(id: number): Promise<PlanoItem | null>;
-  update(id: number, data: IPlanoItem, instanceTransaction?: any): Promise<PlanoItem | null>;
+  update(id: number, data: IPlanoItem, instanceTransaction?: any, options?: any): Promise<PlanoItem | null>;
 }
