@@ -19,20 +19,17 @@ export class PlanoItemRepository extends BaseRepository<PlanoItem> implements IP
 
   public async update(id: number, data: IPlanoItem, instanceTransaction?: any, options ?: any): Promise<PlanoItem | null> {
     try {
-      return await this.sequelizeInstance.transaction(async (transaction) => {
-        const planoItem = await this.planoItemRepository.findById<PlanoItem>(id);
+      const planoItem = await this.planoItemRepository.findById<PlanoItem>(id);
 
-        if (!planoItem) {
-          throw new MessageCodeError("planoitem:valida:planoitem");
-        }
+      if (!planoItem) {
+        throw new MessageCodeError("planoitem:valida:planoitem");
+      }
 
-        instanceTransaction = !instanceTransaction ? transaction : instanceTransaction;
-        options = {
-          validate: false,
-          where: {id},
-        };
-        return await super.update(id, data, instanceTransaction, options);
-      });
+      options = {
+        validate: false,
+        where: {id},
+      };
+      return await super.update(id, data, instanceTransaction, options);
     } catch (error) {
       throw error;
     }

@@ -10,7 +10,7 @@ export const errorMessagesPlano: { [messageCode: string]: IMessages } = {
       titulo: "O plano não pode ser criado",
     },
 
-    "plano:valida:plano": {
+    "plano:notfound": {
       codigo: HttpStatus.BAD_REQUEST,
       motivo: "Plano não encontrado no banco de dados",
       solucao: "Informe um plano vãlido",
