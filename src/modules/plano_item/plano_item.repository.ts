@@ -4,10 +4,6 @@ import { BaseRepository } from "../shared/model/base.repository";
 import { IPlanoItem, IPlanoItemRepository } from "./interfaces";
 import { PlanoItem } from "./plano_item.entity";
 
-/* tslint:disable:no-var-requires */
-/* tslint:disable:max-line-length */
-const moment = require("moment");
-
 @Injectable()
 export class PlanoItemRepository extends BaseRepository<PlanoItem> implements IPlanoItemRepository {
   constructor(
@@ -17,7 +13,7 @@ export class PlanoItemRepository extends BaseRepository<PlanoItem> implements IP
     super(sequelizeInstance, PlanoItem);
   }
 
-  public async update(id: number, data: IPlanoItem, instanceTransaction?: any, options ?: any): Promise<PlanoItem | null> {
+  public async update(id: number, data: IPlanoItem, transaction?: any, options ?: any): Promise<PlanoItem | null> {
     try {
       const planoItem = await this.planoItemRepository.findById<PlanoItem>(id);
 
@@ -29,7 +25,7 @@ export class PlanoItemRepository extends BaseRepository<PlanoItem> implements IP
         validate: false,
         where: {id},
       };
-      return await super.update(id, data, instanceTransaction, options);
+      return await super.update(id, data, transaction, options);
     } catch (error) {
       throw error;
     }
