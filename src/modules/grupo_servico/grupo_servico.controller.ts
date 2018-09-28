@@ -39,7 +39,7 @@ export class GrupoServicoController {
    * @returns Array de grupo de serviço
    */
   @ApiResponse({ status: 200, description: "[GrupoServico]"})
-  // @Roles(RotinasCodigos.LISTAR)
+  @Roles(RotinasCodigos.LISTAR)
   @Get("gruposervicos")
   public async all(@Res() res, @Query() options) {
     const grupoServico = await this.grupoServicoService.getAll(options);
@@ -75,7 +75,7 @@ export class GrupoServicoController {
    * @returns JSON
    */
   @ApiResponse({ status: 200, description: "GrupoServico" })
-  @Roles(RotinasCodigos.LISTAR)
+  // @Roles(RotinasCodigos.LISTAR)
   @Get("gruposervicos/:id")
   public async show(@Res() res, @Param("id") id: number) {
     const gruposervico = await this.grupoServicoService.get(id);
