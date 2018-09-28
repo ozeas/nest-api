@@ -26,6 +26,10 @@ export class AuthMiddleware implements NestMiddleware {
                     return res.status(403).json(this.error);
                 }
 
+                if (!decoded.int_empresa_id || !decoded.pct_usuario_perfil_id) {
+                    return res.status(403).json(this.error);
+                }
+
                 const perfil = await this.obtemPerfil(decoded);
                 if (!perfil) {
                     return res.status(403).json(this.error);
