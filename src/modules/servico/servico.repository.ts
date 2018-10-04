@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { MessageCodeError } from "../../shared/errors/message-code-error";
 import { BaseRepository } from "../shared/model/base.repository";
 import { IServicoRepository } from "./interfaces";
 import { Servico } from "./servico.entity";
@@ -19,6 +20,10 @@ export class ServicoRepository extends BaseRepository<Servico> implements IServi
     try {
       return await this.sequelizeInstance.transaction(async (transaction) => {
         instanceTransaction = !instanceTransaction ? transaction : instanceTransaction;
+
+        if (!model.srv_grupo_servico_id) {
+          throw new MessageCodeError(`servico:valida:srv_grupo_servico_id`);
+        }
 
         const {grupo_servico} = await this.servicoRepository.findOne({
           include: [GrupoServico],
