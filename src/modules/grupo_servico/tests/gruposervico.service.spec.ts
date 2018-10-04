@@ -109,7 +109,7 @@ describe("GrupoServiçoModule", () => {
       };
       await grupoServicoService.create(grupo);
       const expected = await grupoServicoService.get(grupo.id);
-      expect(Object.keys(expected).length).toEqual(7);
+      expect(expected.id).toEqual(grupo.id);
     });
 
     it("Deve retornar erro ao criar grupo de serviço vazio", async () => {

@@ -2,6 +2,7 @@ import { HttpStatus } from "@nestjs/common";
 import { IMessages } from "./interfaces/message.interface";
 
 import {
+    errorMessagesAutoSequencia,
     errorMessagesGrupoServico,
     errorMessagesIndice,
     errorMessagesIndiceTaxa,
@@ -40,6 +41,7 @@ export const errorMessagesConfig: { [messageCode: string]: IMessages } = {
         titulo: "Sem permissão.",
     },
 
+    ...errorMessagesAutoSequencia,
     ...errorMessagesGrupoServico,
     ...errorMessagesServico,
     ...errorMessagesIndice,

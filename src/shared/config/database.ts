@@ -15,7 +15,6 @@ export const databaseConfig: IDatabaseConfig = {
         port: Number(process.env.DB_PORT) || 1433,
         timezone: "-03:00",
         username: process.env.DB_USER || "sa",
-        operatorsAliases: false,
     },
     production: {
         database: process.env.DB_NAME || "dataplus",
@@ -30,7 +29,6 @@ export const databaseConfig: IDatabaseConfig = {
         dialectOptions: {
             encrypt: true
         },
-        operatorsAliases: false,
     },
     test: {
         database: process.env.DB_NAME || "dataplus",
@@ -45,6 +43,5 @@ export const databaseConfig: IDatabaseConfig = {
         dialectOptions: {
             encrypt: true
         },
-        operatorsAliases: false,
     },
 };

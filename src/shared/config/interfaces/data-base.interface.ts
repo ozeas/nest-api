@@ -9,7 +9,6 @@ export interface IDatabaseConfigAttributes {
     force: boolean;
     timezone: string;
     dialectOptions: object;
-    operatorsAliases: boolean;
 }
 
 export interface IDatabaseConfig {
