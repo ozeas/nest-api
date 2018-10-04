@@ -1,10 +1,13 @@
 import { errorMessagesConfig } from "../config/error-message";
-import { IErrorMessages } from "../config/interfaces/error-message.interface";
+import { IMessages } from "../config/interfaces/message.interface";
 
 export class MessageCodeError extends Error {
     public messageCode: string;
-    public httpStatus: number;
-    public errorMessage: string;
+    public codigo: number;
+    public titulo: string;
+    public solucao: string;
+    public tipo: string;
+    public motivo: string;
 
     constructor(messageCode: string) {
         super();
@@ -16,30 +19,33 @@ export class MessageCodeError extends Error {
 
         Error.captureStackTrace(this, this.constructor);
         this.name = this.constructor.name;
-        this.httpStatus = errorMessageConfig.httpStatus;
+        this.codigo = errorMessageConfig.codigo;
         this.messageCode = messageCode;
-        this.errorMessage = errorMessageConfig.errorMessage;
-        this.message = errorMessageConfig.userMessage;
+        this.titulo = errorMessageConfig.titulo;
+        this.motivo = errorMessageConfig.motivo;
+        this.solucao = errorMessageConfig.solucao;
+        this.tipo = errorMessageConfig.tipo;
     }
 
     /**
      * @description: Find the error config by the given message code.
      * @param {string} messageCode
-     * @return {IErrorMessages}
+     * @return {IMessages}
      */
-    private getMessageFromMessageCode(messageCode: string): IErrorMessages {
-        let errorMessageConfig: IErrorMessages | undefined;
-        Object.keys(errorMessagesConfig).some((key) => {
-            if (key === messageCode) {
-                errorMessageConfig = errorMessagesConfig[key];
-                return true;
-            }
-            return false;
-        });
-
+    private getMessageFromMessageCode(messageCode: string): IMessages {
+        let errorMessageConfig: IMessages;
+        const code = `${messageCode}`;
+        errorMessageConfig = errorMessagesConfig[code];
         if (!errorMessageConfig) {
-            throw new Error("Unable to find the given message code error.");
+            errorMessageConfig = {
+                codigo: 400,
+                motivo: "Erro não mapeada pelo sistema",
+                solucao: "Repita a operação ou contate o suporte",
+                tipo: "notFound",
+                titulo: "Erro não mapeada pelo sistema",
+            };
         }
+
         return errorMessageConfig;
     }
 }

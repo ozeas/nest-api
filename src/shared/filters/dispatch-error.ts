@@ -6,11 +6,11 @@ import { MessageCodeError } from "../errors/message-code-error";
 export class DispatchError implements ExceptionFilter {
     public catch(err, res) {
         if (err instanceof MessageCodeError) {
-            res.setHeader("x-message-code-error", err.messageCode);
+            res.setHeader("x-message-code-error", err.codigo);
             res.setHeader("x-message", err.message);
-            res.setHeader("x-httpStatus-error", err.httpStatus);
+            res.setHeader("x-httpStatus-error", err.codigo);
 
-            return res.status(err.httpStatus).send();
+            return res.status(err.codigo).send();
         } else if (err instanceof ValidationError) {
             /* Sequelize validation error. */
             res.setHeader("x-message-code-error", (err as ValidationError).errors[0].type);

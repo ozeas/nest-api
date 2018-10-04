@@ -38,6 +38,7 @@ export class AuthService {
         const payload = {
             int_empresa_id: 1,
             pct_usuario_perfil_id: 7062,
+            log_pct_usuario_id: 1
         };
         return await jwt.sign(payload, process.env.JWT_KEY || "", this._options);
     }
