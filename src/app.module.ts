@@ -6,6 +6,7 @@ import { AutoSequenciaModule } from "./modules/auto_sequencia/auto_sequencia.mod
 import { DicionarioModule } from "./modules/dicionario/dicionario.module";
 import { GrupoServicoModule } from "./modules/grupo_servico/grupo_servico.module";
 import { IndiceModule } from "./modules/indice/indice.module";
+import { ParametroModule } from "./modules/parametro/parametro.module";
 import { PlanoModule } from "./modules/plano/plano.module";
 import { ServicoModule } from "./modules/servico/servico.module";
 import { UserModule } from "./modules/users/user.module";
@@ -18,6 +19,7 @@ import { UserModule } from "./modules/users/user.module";
         DicionarioModule,
         GrupoServicoModule,
         IndiceModule,
+        ParametroModule,
         PlanoModule,
         ServicoModule,
         UserModule,

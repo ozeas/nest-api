@@ -5,3 +5,4 @@ export * from "../../indice_taxa/config/error-message";
 export * from "../../plano/config/error-message";
 export * from "../../plano_item/config/error-message";
 export * from "../../auto_sequencia/config/error-message";
+export * from "../../parametro/config/error-message";
