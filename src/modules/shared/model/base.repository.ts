@@ -33,7 +33,7 @@ export abstract class BaseRepository<T> {
         const options = {
           include,
           returning: true,
-          transaction: !instanceTransaction ? transaction : instanceTransaction,
+          transaction: instanceTransaction ? instanceTransaction : transaction,
         };
         return await this.model.create(model, options);
       });

@@ -4,6 +4,11 @@ import { DatabaseModule } from "../../database/database.module";
 import { databaseProvider } from "../../database/database.provider";
 import * as provider from "../servico.provider";
 
+import {
+  modelProvider as autoSequenciaModelProvider,
+  repositoryProvider as autoSequenciaRepositoryProvider,
+} from "../../auto_sequencia";
+
 describe("ServiceModule", () => {
   describe("ServicoService", () => {
     let servicoService: ServicoService;
@@ -12,7 +17,6 @@ describe("ServiceModule", () => {
     beforeAll(async () => {
       servicos = [
         {
-          codigo: "PR01",
           desativado: false,
           descricao: "Servico 01",
           id: 6000,
@@ -22,7 +26,6 @@ describe("ServiceModule", () => {
           valor: 150.78,
         },
         {
-          codigo: "PR01",
           desativado: false,
           descricao: "Servico 01",
           id: 6001,
@@ -32,7 +35,6 @@ describe("ServiceModule", () => {
           valor: 150.78,
         },
         {
-          codigo: "PR01",
           desativado: false,
           descricao: "Servico 01",
           id: 6002,
@@ -42,7 +44,6 @@ describe("ServiceModule", () => {
           valor: 150.78,
         },
         {
-          codigo: "PR01",
           desativado: false,
           descricao: "Servico 01",
           id: 6003,
@@ -52,7 +53,6 @@ describe("ServiceModule", () => {
           valor: 150.78,
         },
         {
-          codigo: "PR01",
           desativado: false,
           descricao: "Servico 01",
           id: 6004,
@@ -70,6 +70,8 @@ describe("ServiceModule", () => {
           ServicoService,
           provider.servicoProvider,
           provider.repositoryProvider,
+          autoSequenciaRepositoryProvider,
+          autoSequenciaModelProvider,
         ],
       }).compile();
 
@@ -101,7 +103,6 @@ describe("ServiceModule", () => {
 
       it("Deve criar um serviço", async () => {
         const servico = {
-          codigo: "PR01",
           desativado: false,
           descricao: "Servico 9000",
           id: 9001,
@@ -129,7 +130,6 @@ describe("ServiceModule", () => {
         let expected = false;
         try {
           const servico = {
-            codigo: "PR01",
             desativado: false,
             descricao: "Servico 9000",
             id: 9001,
@@ -148,7 +148,6 @@ describe("ServiceModule", () => {
         let expected = false;
         try {
           const servico = {
-            codigo: "PR01",
             desativado: false,
             descricao: "Servico 9000",
             id: 9001,
@@ -186,7 +185,6 @@ describe("ServiceModule", () => {
         let expected = false;
         try {
           const servico = {
-            codigo: "PR01",
             desativado: false,
             id: 9001,
             int_empresa_id: 1,
@@ -205,7 +203,6 @@ describe("ServiceModule", () => {
         let expected = false;
         try {
           const servico = {
-            codigo: "PR01",
             desativado: false,
             descricao: "Servico 9000",
             id: 9001,
@@ -224,7 +221,6 @@ describe("ServiceModule", () => {
         let expected = false;
         try {
           const servico = {
-            codigo: "PR01",
             desativado: false,
             descricao: "Servico 9000",
             id: 9001,

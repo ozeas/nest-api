@@ -37,7 +37,7 @@ export class ServicoController {
    * @returns Array de serviços
    */
   @ApiResponse({ status: 200, description: "[Servico]"})
-  @Roles(RotinasCodigos.LISTAR)
+  // @Roles(RotinasCodigos.LISTAR)
   @Get("servicos")
   public async all(@Res() res, @Query() options) {
     const servico = await this.servicoService.getAll(options);
@@ -54,7 +54,7 @@ export class ServicoController {
    */
   @ApiResponse({status: 201, description: "Serviço criado com sucesso"})
   @ApiForbiddenResponse({description: "Houve um erro ao criar o serviço"})
-  @Roles(RotinasCodigos.INCLUIR)
+  // @Roles(RotinasCodigos.INCLUIR)
   @Post("servicos")
   public async create(@Res() res, @Req() req, @Body() servico) {
     try {
@@ -74,7 +74,7 @@ export class ServicoController {
    * @returns JSON
    */
   @ApiResponse({ status: 200, description: "Servico" })
-  @Roles(RotinasCodigos.LISTAR)
+  // @Roles(RotinasCodigos.LISTAR)
   @Get("servicos/:id")
   public async show(@Res() res, @Param("id") id: number) {
     const servico = await this.servicoService.get(id);

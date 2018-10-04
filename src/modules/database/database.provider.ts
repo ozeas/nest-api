@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { databaseConfig } from "../../shared/index";
 
+import { AutoSequencia } from "../auto_sequencia/auto_sequencia.entity";
 import { GrupoServico } from "../grupo_servico/grupo_servico.entity";
 import { Indice } from "../indice/indice.entity";
 import { IndiceTaxa } from "../indice_taxa/indice_taxa.entity";
@@ -23,9 +24,16 @@ export const databaseProvider = {
             default:
                 config = databaseConfig.development;
         }
+        config = {
+            ...config,
+            isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.READ_COMMITTED,
+            /* tslint:disable:no-console */
+            // logging: console.log,
+        };
         const sequelize = new Sequelize(config);
 
         sequelize.addModels([
+            AutoSequencia,
             GrupoServico,
             Indice,
             IndiceTaxa,

@@ -7,6 +7,11 @@ import { AuthMiddleware } from "../../shared/middlewares/auth.middleware";
 import { DatabaseModule } from "../database/database.module";
 
 import {
+  modelProvider as autoSequenciaModelProvider,
+  repositoryProvider as autoSequenciaRepositoryProvider,
+} from "../auto_sequencia";
+
+import {
   repositoryProvider,
   ServicoController,
   servicoProvider,
@@ -22,6 +27,8 @@ import {
     servicoProvider,
     ServicoService,
     repositoryProvider,
+    autoSequenciaRepositoryProvider,
+    autoSequenciaModelProvider,
   ],
 })
 export class ServicoModule {

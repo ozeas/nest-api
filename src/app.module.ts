@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
 import { RolesGuard } from "./modules/auth/auth.guard";
 import { AuthModule } from "./modules/auth/auth.module";
+import { AutoSequenciaModule } from "./modules/auto_sequencia/auto_sequencia.module";
 import { DicionarioModule } from "./modules/dicionario/dicionario.module";
 import { GrupoServicoModule } from "./modules/grupo_servico/grupo_servico.module";
 import { IndiceModule } from "./modules/indice/indice.module";
@@ -13,6 +14,7 @@ import { UserModule } from "./modules/users/user.module";
     controllers: [],
     imports: [
         AuthModule,
+        AutoSequenciaModule,
         DicionarioModule,
         GrupoServicoModule,
         IndiceModule,
